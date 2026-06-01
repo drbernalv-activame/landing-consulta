@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ActivaMe · Activa tu GLP-1 Nativo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Nunito:wght@400;500;600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde-900:#0F3D14; --verde-700:#1B5E20; --verde-500:#2E7D32; --verde-300:#66BB6A;
+  --verde-soft:#E8F0E4; --salvia:#6B8E4E; --naranja:#E65100; --naranja-soft:#FCEAD9;
+  --grafito:#2A2D28; --crema:#FAF7EF; --crema-2:#F2EDE0; --linea:#DBD4C4;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Nunito',sans-serif;color:var(--grafito);background:var(--crema);line-height:1.6}
+.wrap{max-width:1040px;margin:0 auto;padding:0 22px}
+img{max-width:100%;display:block}
+.sec-num{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--salvia)}
+
+/* review ribbon */
+.ribbon{background:var(--naranja);color:#fff;text-align:center;font-size:12.5px;font-weight:700;padding:7px 12px;font-family:'Syne'}
+
+/* NAV */
+.topnav{position:sticky;top:0;z-index:50;background:rgba(250,247,239,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+.topnav .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:12px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:9px}
+.brand .pin{width:28px;height:28px;border-radius:50% 50% 50% 2px;background:linear-gradient(140deg,var(--salvia),var(--verde-700));transform:rotate(-2deg);position:relative;flex-shrink:0}
+.brand .pin:after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--crema)}
+.brand b{font-family:'Syne';font-weight:800;font-size:16px;color:var(--verde-900)}
+.brand b span{color:var(--salvia)}
+.nav-cta{font-family:'Syne';font-weight:700;font-size:13px;background:var(--naranja);color:#fff;border:none;border-radius:10px;padding:9px 15px;cursor:pointer}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;color:#fff;background:radial-gradient(120% 110% at 80% -10%,rgba(102,187,106,.25),transparent 55%),linear-gradient(160deg,var(--verde-900),var(--verde-700))}
+.hero:after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:24px 24px}
+.hero .wrap{position:relative;z-index:2;padding-top:60px;padding-bottom:60px}
+.hero .eyebrow{font-family:'Syne';font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--verde-300)}
+.hero h1{font-family:'Syne';font-weight:800;font-size:clamp(30px,6.4vw,54px);line-height:1.06;margin:14px 0 16px;max-width:760px}
+.hero h1 em{font-style:normal;background:linear-gradient(120deg,#a5d6a7,#66BB6A);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.hero p.sub{font-size:clamp(16px,2.3vw,19px);max-width:600px;color:#E2EBDC}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{font-family:'Syne';font-weight:700;font-size:16px;border:none;border-radius:14px;padding:16px 26px;cursor:pointer;transition:.18s;text-decoration:none;display:inline-block;text-align:center}
+.btn-orange{background:var(--naranja);color:#fff;box-shadow:0 10px 26px rgba(230,81,0,.35)}
+.btn-orange:hover{background:#c44600;transform:translateY(-2px)}
+.btn-green{background:var(--verde-500);color:#fff;box-shadow:0 10px 26px rgba(46,125,50,.3)}
+.btn-green:hover{background:var(--verde-700);transform:translateY(-2px)}
+.btn-outline{background:rgba(255,255,255,.08);color:#fff;border:1.5px solid rgba(255,255,255,.35)}
+.btn-outline:hover{background:rgba(255,255,255,.16)}
+.btn-ghost2{background:transparent;color:var(--verde-700);border:1.5px solid var(--verde-300)}
+.micro{margin-top:14px;font-size:13px;color:#bcd1b4;font-weight:600}
+
+/* SECTION base */
+section{padding:60px 0}
+.eyebrow2{font-family:'Syne';font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--salvia);text-align:center}
+h2.sec{font-family:'Syne';font-weight:800;font-size:clamp(24px,4.4vw,36px);color:var(--verde-900);text-align:center;line-height:1.14;margin:10px auto 10px;max-width:740px}
+.sec-lead{text-align:center;color:#4a4f44;max-width:620px;margin:0 auto;font-size:17px}
+
+/* espejo */
+.mirror{background:var(--crema-2)}
+.pains{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:760px;margin:30px auto 0}
+.pain{background:#fff;border:1px solid var(--linea);border-radius:13px;padding:15px 16px;font-size:14.5px;display:flex;gap:10px;align-items:flex-start}
+.pain .x{color:var(--naranja);font-weight:800;flex-shrink:0}
+.mirror .closer{text-align:center;font-family:'Lora';font-style:italic;font-size:19px;color:var(--verde-900);max-width:560px;margin:26px auto 0}
+
+/* enemigo / diagrama */
+.enemy{background:linear-gradient(160deg,var(--grafito),#1a1d18);color:#fff}
+.enemy h2.sec,.enemy .eyebrow2{color:#fff}.enemy .eyebrow2{color:var(--verde-300)}
+.enemy .sec-lead{color:#cfd6c8}
+.axis{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:760px;margin:34px auto 0}
+.axis .node{border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,.14)}
+.axis .on{background:rgba(230,81,0,.16);border-color:rgba(230,81,0,.4)}
+.axis .off{background:rgba(102,187,106,.14);border-color:rgba(102,187,106,.4)}
+.axis .node h4{font-family:'Syne';margin:0 0 6px;font-size:17px}
+.axis .on h4{color:#ffb27a}.axis .off h4{color:#a5d6a7}
+.axis .node p{margin:0;font-size:14px;color:#dfe4d9}
+.axis .node .tag{font-family:'Roboto Mono',monospace;font-size:11px;letter-spacing:.1em;opacity:.8}
+
+/* DX DIAGRAM (eje duodeno-íleon) */
+.dxdiagram{display:flex;align-items:stretch;justify-content:center;gap:14px;max-width:820px;margin:36px auto 0}
+.dx-state{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:18px;display:flex;flex-direction:column;align-items:center}
+.dx-state.problem{border-color:rgba(230,81,0,.4)}
+.dx-state.solved{border-color:rgba(102,187,106,.45)}
+.dx-label{font-family:'Syne';font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#ffb27a;margin-bottom:14px}
+.dx-label.green{color:#a5d6a7}
+.gut{width:100%;max-width:200px;display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.seg{border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;position:relative}
+.seg-tag{font-family:'Roboto Mono',monospace;font-size:10px;letter-spacing:.14em;opacity:.85}
+.seg-state{font-family:'Syne';font-weight:700;font-size:15px}
+.seg.duo.on{background:linear-gradient(180deg,rgba(230,81,0,.55),rgba(230,81,0,.25));border:1px solid rgba(255,140,70,.6);box-shadow:0 0 0 3px rgba(230,81,0,.12)}
+.seg.duo.on .seg-tag{color:#ffd8bf}.seg.duo.on .seg-state{color:#fff}
+.seg.ile.off{background:transparent;border:1.5px dashed rgba(255,255,255,.35)}
+.seg.ile.off .seg-tag,.seg.ile.off .seg-state{color:#c8cdc0;opacity:.7}
+.seg.duo.calm{background:rgba(120,80,60,.25);border:1px solid rgba(160,120,90,.35)}
+.seg.duo.calm .seg-tag,.seg.duo.calm .seg-state{color:#d6c3b4}
+.seg.ile.active{background:linear-gradient(180deg,rgba(102,187,106,.55),rgba(46,125,50,.3));border:1px solid rgba(165,214,167,.7);box-shadow:0 0 0 3px rgba(102,187,106,.15)}
+.seg.ile.active .seg-tag{color:#d4edd5}.seg.ile.active .seg-state{color:#fff}
+.signal{font-family:'Lora',serif;font-style:italic;font-size:15px;text-align:center;border-radius:12px;padding:10px 12px;margin-bottom:14px;width:100%;line-height:1.3}
+.signal.red{background:rgba(230,81,0,.16);color:#ffb27a;border:1px solid rgba(230,81,0,.3)}
+.signal.green{background:rgba(102,187,106,.16);color:#a5d6a7;border:1px solid rgba(102,187,106,.35)}
+.conseq{list-style:none;padding:0;margin:auto 0 0;width:100%;font-size:13.5px}
+.conseq li{padding:6px 0 6px 22px;position:relative;border-top:1px solid rgba(255,255,255,.08);color:#dfe4d9}
+.conseq.red li:before{content:"✕";position:absolute;left:0;color:#ff8a50;font-weight:800}
+.conseq.green li:before{content:"✓";position:absolute;left:0;color:#a5d6a7;font-weight:800}
+.dx-bridge{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;flex-shrink:0}
+.bridge-circle{width:52px;height:52px;border-radius:50%;background:#fff;color:var(--verde-700);font-size:26px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.bridge-name{font-family:'Syne';font-weight:800;font-size:13px;color:#a5d6a7;letter-spacing:.04em}
+@media(max-width:640px){
+  .dxdiagram{flex-direction:column;align-items:stretch}
+  .dx-bridge{flex-direction:row;justify-content:center;padding:4px 0}
+  .bridge-circle{transform:rotate(90deg)}
+  .gut{max-width:none}
+}
+
+/* solucion */
+.sol-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:34px}
+.sol-card{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:24px}
+.sol-card .ic{font-size:30px}
+.sol-card h3{font-family:'Syne';font-size:19px;color:var(--verde-900);margin:10px 0 6px}
+.sol-card p{margin:0;font-size:14.5px;color:#4a4f44}
+.ana-band{background:var(--verde-soft);border:1px solid var(--verde-300);border-radius:18px;padding:22px;margin-top:18px;display:flex;gap:16px;align-items:center}
+.ana-band .big{font-size:38px}
+.ana-band .ana-avatar{flex-shrink:0;width:84px;height:84px}
+.ana-band .ana-photo{width:84px;height:84px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 6px 16px rgba(27,94,32,.2);display:block}
+.ana-band h3{font-family:'Syne';margin:0 0 4px;color:var(--verde-900);font-size:19px}
+.ana-band p{margin:0;font-size:14.5px;color:#3c4038}
+
+/* ruta */
+.ruta{background:var(--verde-soft)}
+.phases{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:34px;counter-reset:p}
+.phase{background:#fff;border:1px solid var(--linea);border-radius:15px;padding:18px;position:relative}
+.phase .wk{font-family:'Roboto Mono',monospace;font-size:11px;color:var(--salvia)}
+.phase h4{font-family:'Syne';color:var(--verde-900);margin:6px 0 6px;font-size:16px}
+.phase p{margin:0;font-size:13px;color:#4a4f44}
+.phase:before{content:counter(p);counter-increment:p;position:absolute;top:-12px;right:14px;width:26px;height:26px;background:var(--verde-700);color:#fff;border-radius:8px;font-family:'Syne';font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+
+/* autoridad */
+.auth{text-align:center}
+.auth .photo{width:130px;height:130px;border-radius:50%;margin:24px auto 16px;background:linear-gradient(150deg,var(--verde-300),var(--verde-700));display:flex;align-items:center;justify-content:center;font-size:54px;border:4px solid #fff;box-shadow:0 10px 30px rgba(27,94,32,.25)}
+.auth .name{font-family:'Syne';font-weight:800;font-size:24px;color:var(--verde-900)}
+.auth .role{color:var(--salvia);font-weight:600;margin-bottom:18px}
+.stats{display:flex;justify-content:center;gap:30px;flex-wrap:wrap;margin:20px 0}
+.stat b{font-family:'Syne';font-weight:800;font-size:34px;color:var(--naranja);display:block;line-height:1}
+.stat span{font-size:13px;color:#5a5f54}
+.manifesto{font-family:'Lora';font-style:italic;font-size:20px;color:var(--verde-900);max-width:640px;margin:14px auto 0;line-height:1.4}
+
+/* programa valor */
+.value{background:var(--crema-2)}
+.value-card{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:30px;max-width:720px;margin:34px auto 0;box-shadow:0 14px 36px rgba(27,94,32,.08)}
+.incl{list-style:none;padding:0;margin:0 0 22px;font-size:15px}
+.incl li{padding:10px 0 10px 30px;position:relative;border-bottom:1px dashed var(--linea)}
+.incl li:before{content:"✓";position:absolute;left:0;color:var(--verde-500);font-weight:800;font-size:17px}
+.incl li b{color:var(--verde-700)}
+.price-block{text-align:center;background:var(--verde-soft);border-radius:16px;padding:22px;margin-bottom:18px}
+.price-block .val{color:#7a8070;text-decoration:line-through;font-size:18px}
+.price-block .now{font-family:'Syne';font-weight:800;font-size:42px;color:var(--verde-900);line-height:1;margin:4px 0}
+.price-block .save{display:inline-block;background:var(--naranja);color:#fff;font-family:'Syne';font-weight:700;font-size:13px;padding:5px 13px;border-radius:99px;margin-top:8px}
+.price-block .pay{font-size:13.5px;color:#5a5f54;margin-top:12px}
+.consult-cta{text-align:center}
+.tranq{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:13px;color:#5a5f54}
+.tranq span:before{content:"✓ ";color:var(--verde-500);font-weight:800}
+.online-anchor{margin-bottom:10px;font-size:14.5px}
+.online-anchor .strike{color:#9a9f90;text-decoration:line-through}
+.online-anchor .save33{color:var(--naranja);font-weight:800;font-family:'Syne'}
+
+/* tirze */
+.tirze-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:30px}
+.tz{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:20px}
+.tz .ic{font-size:26px}
+.tz h4{font-family:'Syne';color:var(--verde-900);margin:8px 0 6px;font-size:17px}
+.tz p{margin:0;font-size:14px;color:#4a4f44}
+
+/* garantia */
+.guarantee{background:linear-gradient(160deg,var(--verde-900),var(--verde-700));color:#fff;text-align:center}
+.seal{width:96px;height:96px;border-radius:50%;border:3px solid var(--verde-300);display:flex;align-items:center;justify-content:center;font-size:42px;margin:24px auto 18px}
+.guarantee h2.sec{color:#fff}
+.guarantee p{max-width:600px;margin:0 auto;color:#dbe6d4;font-size:16.5px}
+.guarantee .evidence-chips{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;max-width:620px;margin:20px auto}
+.guarantee .evidence-chips span{flex:1;min-width:200px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.guarantee .evidence-chips b{font-family:'Syne';font-weight:800;font-size:24px;color:#a5d6a7}
+.guarantee .evidence-chips i{font-style:normal;font-size:12.5px;color:#cfe0c8}
+
+/* faq */
+.faq{background:var(--crema-2)}
+details{background:#fff;border:1px solid var(--linea);border-radius:14px;margin-bottom:10px;overflow:hidden}
+summary{cursor:pointer;padding:16px 18px;font-family:'Syne';font-weight:700;font-size:15.5px;color:var(--verde-900);list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";color:var(--salvia);font-weight:800;font-size:20px}
+details[open] summary:after{content:"–"}
+details .ans{padding:0 18px 16px;font-size:14.5px;color:#4a4f44}
+
+/* final cta */
+.final{background:linear-gradient(160deg,var(--verde-700),var(--verde-900));color:#fff;text-align:center}
+.final h2{font-family:'Syne';font-weight:800;font-size:clamp(25px,4.5vw,38px);max-width:720px;margin:0 auto 14px;line-height:1.14}
+.final p{max-width:540px;margin:0 auto 24px;color:#dbe6d4;font-size:17px}
+.final .secondary{margin-top:14px}
+.final .secondary button{background:none;border:none;color:#a5d6a7;font-family:'Nunito';font-weight:700;font-size:15px;cursor:pointer;text-decoration:underline}
+
+footer{background:var(--grafito);color:#b8bdb0;padding:32px 0;font-size:13px;text-align:center}
+footer a{color:#a5d6a7;text-decoration:none}
+.slogan{font-family:'Lora';font-style:italic;font-size:18px;color:#fff;margin-bottom:10px}
+
+@media(max-width:720px){
+  .pains,.sol-grid,.phases,.tirze-grid,.axis{grid-template-columns:1fr}
+  section{padding:46px 0}
+  .phases{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="ribbon">BORRADOR PARA REVISIÓN · copy reconstruido — el Dr. Bernal ajusta el texto fino</div>
+
+<nav class="topnav">
+  <div class="wrap">
+    <div class="brand"><div class="pin"></div><b>Activa<span>Me</span></b></div>
+    <button class="nav-cta" onclick="openQuiz()">Hacer el test</button>
+  </div>
+</nav>
+
+<!-- SEC 1 · HÉROE (CTA = Quiz) -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Primer centro en México · Activación dual del GLP-1</div>
+    <h1>Activa tu <em>GLP-1 nativo</em> y enseña a tu cuerpo a producir saciedad otra vez</h1>
+    <p class="sub">Combinamos la medicina más avanzada con la activación de tu propia fisiología — guiada cada día por Ana, tu coach metabólico con inteligencia artificial.</p>
+    <div class="cta-row">
+      <button class="btn btn-orange" onclick="openQuiz()">Haz el test: ¿Tu GLP-1 está apagado? →</button>
+    </div>
+    <div class="micro">Gratis · 2 minutos · Descubre tu perfil metabólico</div>
+  </div>
+</header>
+
+<!-- SEC 2 · ESPEJO -->
+<section class="mirror">
+  <div class="wrap">
+    <span class="sec-num">02 · El espejo</span>
+    <h2 class="sec">Si haces todo "bien" y tu cuerpo aún no responde, esto es para ti</h2>
+    <div class="pains">
+      <div class="pain"><span class="x">✕</span><span>Tienes hambre todo el día, aunque acabes de comer.</span></div>
+      <div class="pain"><span class="x">✕</span><span>Bajas de peso y lo recuperas apenas te relajas.</span></div>
+      <div class="pain"><span class="x">✕</span><span>Comes poco y aun así la báscula no se mueve.</span></div>
+      <div class="pain"><span class="x">✕</span><span>Te sientes inflamada, sin energía, atrapada.</span></div>
+      <div class="pain"><span class="x">✕</span><span>Probaste dietas, ayunos y "fuerza de voluntad".</span></div>
+      <div class="pain"><span class="x">✕</span><span>Sientes que tu cuerpo trabaja en tu contra.</span></div>
+    </div>
+    <p class="closer">No es falta de voluntad. Es biología — y la biología se puede reprogramar.</p>
+  </div>
+</section>
+
+<!-- SEC 3 · ENEMIGO + diagrama -->
+<section class="enemy">
+  <div class="wrap">
+    <span class="sec-num" style="color:var(--verde-300)">03 · El verdadero enemigo</span>
+    <h2 class="sec">El problema no eres tú. Es una señal mal calibrada</h2>
+    <p class="sec-lead">Tu intestino tiene dos zonas con señales opuestas. Cuando la de arriba domina, tu cuerpo guarda. Cuando despierta la de abajo, tu cuerpo suelta.</p>
+
+    <div class="dxdiagram">
+      <!-- ESTADO ACTUAL -->
+      <div class="dx-state problem">
+        <div class="dx-label">Estado actual</div>
+        <div class="gut">
+          <div class="seg duo on">
+            <span class="seg-tag">DUODENO</span>
+            <span class="seg-state">🔴 Hiperactivo</span>
+          </div>
+          <div class="seg ile off">
+            <span class="seg-tag">ÍLEON</span>
+            <span class="seg-state">⚪ Dormido</span>
+          </div>
+        </div>
+        <div class="signal red">"Almacena grasa,<br>sigue comiendo"</div>
+        <ul class="conseq red">
+          <li>Hambre constante</li>
+          <li>Resistencia a la insulina</li>
+          <li>Grasa visceral</li>
+          <li>Recuperas el peso</li>
+        </ul>
+      </div>
+
+      <!-- PUENTE = ACTIVAME -->
+      <div class="dx-bridge">
+        <div class="bridge-circle">→</div>
+        <div class="bridge-name">ActivaMe</div>
+      </div>
+
+      <!-- CON ACTIVAME -->
+      <div class="dx-state solved">
+        <div class="dx-label green">Con ActivaMe</div>
+        <div class="gut">
+          <div class="seg duo calm">
+            <span class="seg-tag">DUODENO</span>
+            <span class="seg-state">🟤 Tranquilo</span>
+          </div>
+          <div class="seg ile active">
+            <span class="seg-tag">ÍLEON</span>
+            <span class="seg-state">🟢 Activado</span>
+          </div>
+        </div>
+        <div class="signal green">"Suficiente.<br>Quema grasa."</div>
+        <ul class="conseq green">
+          <li>Saciedad real</li>
+          <li>GLP-1 nativo activo</li>
+          <li>Quema sostenible</li>
+          <li>Sin rebote</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="sec-lead" style="margin-top:28px;color:#fff;font-family:'Lora';font-style:italic">"Apaga tu duodeno, activa tu íleon."</p>
+  </div>
+</section>
+
+<!-- SEC 4 · SOLUCIÓN ÚNICA -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">04 · La solución</span>
+    <h2 class="sec">Lo que nos hace únicos: activación dual + Ana</h2>
+    <p class="sec-lead">El medicamento no es el protagonista: lo usamos como un apoyo temporal, en dosis bajas, mientras reactivamos la producción de tus propias hormonas de la saciedad — para que tu cuerpo aprenda a no depender de él.</p>
+    <div class="sol-grid">
+      <div class="sol-card"><div class="ic">💉</div><h3>Activación externa</h3><p>El análogo (Tirzepatida) genera control desde el primer día, con seguimiento médico semanal.</p></div>
+      <div class="sol-card"><div class="ic">🌿</div><h3>Activación nativa</h3><p>Nutrición funcional, microbiota y hábitos despiertan tu íleon para que tu cuerpo produzca su propio GLP-1.</p></div>
+    </div>
+    <div class="ana-band">
+      <div class="ana-avatar"><img class="ana-photo" src="data:image/jpeg;base64,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" alt="Ana, tu coach metabólico con IA"></div>
+      <div><h3>Ana, tu coach metabólico con IA</h3><p>Disponible 24/7 desde tu celular: plan dinámico, diario metabólico, lecciones y respuestas a cada duda. El acompañamiento que ningún otro centro tiene.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEC 5 · RUTA 8 SEMANAS -->
+<section class="ruta">
+  <div class="wrap">
+    <span class="sec-num">05 · Tu ruta</span>
+    <h2 class="sec">8 semanas para recuperar el control de tu metabolismo</h2>
+    <div class="phases">
+      <div class="phase"><div class="wk">Semanas 1–2</div><h4>Cimientos</h4><p>Bajamos la insulina y ponemos las bases. Tu cuerpo deja de guardar.</p></div>
+      <div class="phase"><div class="wk">Semanas 3–4</div><h4>Activación</h4><p>Despertamos el íleon y tu GLP-1 nativo. Llega la saciedad real.</p></div>
+      <div class="phase"><div class="wk">Semanas 5–6</div><h4>Profundización</h4><p>Desbloqueamos la quema de grasa y afinamos tu fisiología.</p></div>
+      <div class="phase"><div class="wk">Semanas 7–8</div><h4>Autonomía</h4><p>Tu cuerpo se autorregula. Reducimos la dependencia del fármaco.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEC 7 · AUTORIDAD -->
+<section class="auth">
+  <div class="wrap">
+    <span class="sec-num">06 · Quién te acompaña</span>
+    <div class="photo">🩺</div>
+    <div class="name">Dr. Héctor Bernal</div>
+    <div class="role">Cirujano bariatra · Medicina funcional metabólica</div>
+    <div class="stats">
+      <div class="stat"><b>18+</b><span>años de experiencia</span></div>
+      <div class="stat"><b>4,000+</b><span>pacientes atendidos</span></div>
+    </div>
+    <p class="manifesto">"No vendemos inyecciones. Diseñamos fisiología. Mi objetivo no es que dependas de un fármaco para siempre — es enseñarle a tu cuerpo a producir saciedad por sí mismo."</p>
+  </div>
+</section>
+
+<!-- SEC 8 · PROGRAMA VALOR (CTA = Agendar) -->
+<section class="value">
+  <div class="wrap">
+    <span class="sec-num">07 · El programa</span>
+    <h2 class="sec">Todo lo que incluye tu transformación de 8 semanas</h2>
+    <div class="value-card">
+      <ul class="incl">
+        <li><b>Evaluación médica y diagnóstico funcional</b> con composición corporal avanzada (InBody 970)</li>
+        <li><b>Hasta 10 consultas</b> con equipo multidisciplinario y educadora en GLP-1</li>
+        <li><b>Aplicación médica semanal</b> de Tirzepatida</li>
+        <li><b>Kit de activación GLP-1 nativo:</b> Fibra Inteligente · Probiótico GLP-1 Booster · Proteína Diurna · Proteína Nocturna</li>
+        <li><b>Acceso a Ana</b>, tu coach metabólico con IA, + plataforma educativa</li>
+        <li><b>Libro</b> "Cómo activar tu GLP-1 nativo" + Tribu ActivaMe</li>
+      </ul>
+      <div class="price-block">
+        <div class="val">Valor real: $29,900 MXN</div>
+        <div class="now">$24,900 MXN</div>
+        <div class="save">Ahorras $5,000 (17%)</div>
+        <div class="pay">Pago único · o $15,000 inicial + 7 semanales de $1,500</div>
+      </div>
+      <div class="consult-cta">
+        <div class="online-anchor">En consultorio <span class="strike">$1,500</span> · <span class="save33">$1,000 al reservar y pagar en línea (ahorra 33%)</span></div>
+        <a class="btn btn-orange" href="https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05" target="_blank" rel="noopener">Agendar consulta en línea · $1,000 MXN →</a>
+        <div class="tranq"><span>Pago online seguro</span><span>45 min con el Dr. Bernal</span><span>Reagenda sin costo</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEC 9 · POR QUÉ TIRZEPATIDA -->
+<section>
+  <div class="wrap">
+    <span class="sec-num">08 · La ciencia</span>
+    <h2 class="sec">Por qué usamos los análogos más avanzados</h2>
+    <div class="tirze-grid">
+      <div class="tz"><div class="ic">🎯</div><h4>Doble acción</h4><p>La Tirzepatida activa dos vías (GIP + GLP-1) para un control del apetito más potente y sostenido.</p></div>
+      <div class="tz"><div class="ic">📉</div><h4>Resultados reales</h4><p>Reducción significativa de peso y mejora de marcadores metabólicos bajo supervisión médica.</p></div>
+      <div class="tz"><div class="ic">🌿</div><h4>Para soltarlo después</h4><p>Lo usamos como puente: mientras tanto, activamos tu GLP-1 nativo para reducir la dependencia.</p></div>
+      <div class="tz"><div class="ic">🩺</div><h4>Siempre con médico</h4><p>Titulación, seguimiento y manejo de efectos a cargo del equipo clínico, nunca por tu cuenta.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SEC 10 · GARANTÍA -->
+<section class="guarantee">
+  <div class="wrap">
+    <div class="seal">🛡️</div>
+    <h2 class="sec">Nuestro compromiso clínico</h2>
+    <p style="margin-bottom:18px">La medicina que usamos está respaldada por evidencia de primer nivel. En el estudio <b>SURMOUNT-1</b> (New England Journal of Medicine · 2,539 participantes · 72 semanas), la tirzepatida logró reducciones de peso de hasta <b>22.5%</b> en promedio — y esa pérdida provino <b>principalmente de grasa</b>. En la comparación directa <b>SURMOUNT-5</b> superó a la semaglutida (−20.2% vs. la alternativa).</p><div class="evidence-chips"><span><b>hasta −22.5%</b><i>peso promedio · SURMOUNT-1</i></span><span><b>Grasa</b><i>la pérdida fue principalmente de grasa (subestudio DXA)</i></span></div><p>No prometemos milagros: combinamos esa medicina probada con la activación de tu <b>GLP-1 nativo</b> y un acompañamiento real. Si sigues el método, ajustamos tu protocolo las veces necesarias hasta encontrar lo que funciona para tu cuerpo.</p><p style="font-size:13px;opacity:.8;margin-top:14px">Datos de estudios clínicos; los resultados individuales varían y dependen de tu valoración médica.</p>
+  </div>
+</section>
+
+<!-- SEC 11 · FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <span class="sec-num">09 · Dudas</span>
+    <h2 class="sec">Preguntas frecuentes</h2>
+    <div style="max-width:740px;margin:30px auto 0">
+      <details><summary>¿Soy candidata(o) para el programa?</summary><div class="ans">Si presentas exceso de peso u obesidad y buscas un abordaje médico integral que combine activación del GLP-1 nativo, nutrición funcional y, cuando se indica, soporte farmacológico temporal. La decisión final se toma tras tu valoración clínica.</div></details>
+      <details><summary>¿Puedo iniciar si ya uso análogos de GLP-1?</summary><div class="ans">Sí. Integramos tu tratamiento actual y diseñamos la transición hacia la activación natural para reducir la dependencia del fármaco cuando sea clínicamente apropiado.</div></details>
+      <details><summary>¿En qué se diferencia de "solo inyecciones"?</summary><div class="ans">No nos enfocamos solo en el fármaco: enseñamos a tu cuerpo a producir saciedad (GLP-1 nativo) con nutrición estratégica, microbiota y hábitos. El objetivo es autonomía metabólica, no dependencia.</div></details>
+      <details><summary>¿Qué es Ana y para qué sirve?</summary><div class="ans">Ana es tu coach metabólico con inteligencia artificial: te acompaña 24/7 desde el celular con plan de alimentación dinámico, diario metabólico, lecciones diarias y respuestas a tus dudas en el momento.</div></details>
+      <details><summary>¿Qué pasa en la consulta de $1,000?</summary><div class="ans">Es una valoración médica de 45 minutos con el Dr. Bernal para revisar tu caso y definir si el programa es para ti. Es un servicio independiente con valor propio (no es un anticipo del programa). En consultorio cuesta $1,500; al reservar y pagar en línea son $1,000 — un 33% de ahorro por usar el canal digital.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- SEC 13 · CTA FINAL (embudo dual) -->
+<section class="final">
+  <div class="wrap">
+    <span class="sec-num" style="color:var(--verde-300)">10 · Tu siguiente paso</span>
+    <h2>No es tu culpa. Tu GLP-1 está apagado.</h2>
+    <p>Tu cuerpo tiene la capacidad de volver a autorregularse. Nosotros te damos el método, la guía y el acompañamiento. El primer paso es una valoración con el Dr. Bernal.</p>
+    <div class="online-anchor" style="color:#dbe6d4;margin-bottom:14px">En consultorio <span style="text-decoration:line-through;opacity:.7">$1,500</span> · <span style="color:#ffb27a;font-weight:800;font-family:'Syne'">$1,000 al reservar en línea — ahorra 33%</span></div>
+    <a class="btn btn-orange" href="https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05" target="_blank" rel="noopener">Agendar consulta en línea · $1,000 MXN →</a>
+    <div class="secondary">¿Aún no estás lista(o)? <button onclick="openQuiz()">Haz primero el test gratis de 2 minutos →</button></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="slogan">"No vendemos inyecciones. Diseñamos fisiología."</div>
+    <p>Clínica ActivaMe · Chihuahua, México · <a href="https://wa.link/snxs7p" target="_blank">WhatsApp</a></p>
+    <p style="opacity:.6">© Clínica ActivaMe. Todos los derechos reservados.</p>
+  </div>
+</footer>
+
+
+<style>
+#quizOverlay{position:fixed;inset:0;z-index:1000;background:var(--crema);overflow-y:auto;display:none}
+#quizOverlay.open{display:block}
+#quizOverlay .quizClose{position:fixed;top:14px;right:16px;z-index:1010;width:40px;height:40px;border-radius:50%;border:1px solid var(--linea);background:#fff;color:var(--grafito);font-size:20px;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+#quizOverlay .app{flex:initial;min-height:100vh;display:flex;flex-direction:column;max-width:560px;margin:0 auto;padding:18px 18px 40px}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+#quizOverlay *{box-sizing:border-box}
+#quizOverlay .app{flex:1;width:100%;max-width:560px;margin:0 auto;padding:18px 18px 40px;display:flex;flex-direction:column}
+#quizOverlay /* top bar */
+.topbar{display:flex;align-items:center;gap:10px;padding:6px 2px 14px}
+#quizOverlay .logo{display:flex;align-items:center;gap:9px}
+#quizOverlay .logo .pin{width:30px;height:30px;border-radius:50% 50% 50% 2px;background:linear-gradient(140deg,var(--salvia),var(--verde-700));transform:rotate(-2deg);position:relative;flex-shrink:0}
+#quizOverlay .logo .pin:after{content:"";position:absolute;inset:9px;border-radius:50%;background:var(--crema)}
+#quizOverlay .logo b{font-family:'Syne';font-weight:800;font-size:15px;color:var(--verde-900);letter-spacing:-.01em}
+#quizOverlay .logo b span{color:var(--salvia)}
+#quizOverlay /* progress */
+.progress{height:6px;background:var(--crema-2);border-radius:99px;overflow:hidden;margin-bottom:4px}
+#quizOverlay .progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--salvia),var(--verde-500));border-radius:99px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+#quizOverlay .qcount{font-size:12px;color:var(--salvia);font-weight:600;margin:6px 2px 0;font-family:'Syne'}
+#quizOverlay /* screens */
+.screen{display:none;flex:1;flex-direction:column;animation:fade .45s ease}
+#quizOverlay .screen.active{display:flex}
+#quizOverlay /* welcome */
+.welcome{justify-content:center;text-align:center;gap:6px}
+#quizOverlay .welcome .eyebrow{font-family:'Syne';font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--salvia)}
+#quizOverlay .welcome h1{font-family:'Syne';font-weight:800;font-size:clamp(27px,7vw,38px);line-height:1.08;color:var(--verde-900);margin:8px 0}
+#quizOverlay .welcome h1 em{font-style:normal;color:var(--naranja)}
+#quizOverlay .welcome p{font-size:16px;color:#4a4f44;max-width:420px;margin:6px auto 4px}
+#quizOverlay .welcome .meta{font-size:13px;color:var(--salvia);margin-top:14px;font-weight:600}
+#quizOverlay .welcome .quote{font-family:'Lora';font-style:italic;font-size:17px;color:var(--verde-700);margin:22px auto 0;max-width:380px}
+#quizOverlay /* question */
+.qhead{font-family:'Syne';font-weight:700;font-size:22px;color:var(--verde-900);margin:18px 0 4px;line-height:1.2}
+#quizOverlay .qhelp{font-size:14px;color:#6a6f63;margin:0 0 18px}
+#quizOverlay .opts{display:flex;flex-direction:column;gap:11px}
+#quizOverlay .opt{display:flex;align-items:center;gap:13px;background:#fff;border:1.5px solid var(--linea);border-radius:15px;padding:15px 16px;cursor:pointer;transition:.15s;text-align:left;font-size:15.5px;font-weight:600;color:var(--grafito)}
+#quizOverlay .opt:hover{border-color:var(--verde-300);transform:translateY(-1px)}
+#quizOverlay .opt:active{transform:scale(.99)}
+#quizOverlay .opt.sel{border-color:var(--verde-500);background:var(--verde-soft)}
+#quizOverlay .opt .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--linea);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s}
+#quizOverlay .opt.sel .dot{border-color:var(--verde-500);background:var(--verde-500)}
+#quizOverlay .opt.sel .dot:after{content:"";width:8px;height:8px;border-radius:50%;background:#fff}
+#quizOverlay .opt .emo{font-size:20px;flex-shrink:0}
+#quizOverlay /* nav */
+.nav{display:flex;gap:10px;margin-top:auto;padding-top:24px}
+#quizOverlay .btn{flex:1;font-family:'Syne';font-weight:700;font-size:16px;border:none;border-radius:14px;padding:15px;cursor:pointer;transition:.15s}
+#quizOverlay .btn-primary{background:var(--verde-700);color:#fff;box-shadow:0 6px 18px rgba(27,94,32,.25)}
+#quizOverlay .btn-primary:hover{background:var(--verde-900)}
+#quizOverlay .btn-primary:disabled{background:#c3c9bc;box-shadow:none;cursor:not-allowed}
+#quizOverlay .btn-ghost{flex:0 0 auto;background:transparent;color:var(--salvia);border:1.5px solid var(--linea);padding:15px 20px}
+#quizOverlay .btn-big{width:100%;background:var(--naranja);color:#fff;font-size:17px;box-shadow:0 8px 20px rgba(230,81,0,.3)}
+#quizOverlay .btn-big:hover{background:#c44600}
+#quizOverlay /* capture form */
+.field{margin-bottom:14px}
+#quizOverlay .field label{display:block;font-family:'Syne';font-weight:600;font-size:13px;color:var(--verde-700);margin-bottom:6px}
+#quizOverlay .field input{width:100%;border:1.5px solid var(--linea);border-radius:13px;padding:14px 15px;font-size:16px;font-family:'Nunito';font-weight:600;color:var(--grafito);background:#fff}
+#quizOverlay .field input:focus{outline:none;border-color:var(--verde-500)}
+#quizOverlay .consent{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:#5a5f54;margin:16px 0 4px;cursor:pointer}
+#quizOverlay .consent input{margin-top:3px;width:18px;height:18px;accent-color:var(--verde-500);flex-shrink:0}
+#quizOverlay .consent a{color:var(--verde-700);font-weight:700}
+#quizOverlay /* result */
+.result{gap:0}
+#quizOverlay .res-badge{font-family:'Syne';font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--salvia);text-align:center;margin-top:6px}
+#quizOverlay .res-name{font-family:'Syne';font-weight:800;font-size:clamp(26px,6.5vw,34px);text-align:center;color:var(--verde-900);line-height:1.1;margin:6px 0 2px}
+#quizOverlay .res-pheno-ico{font-size:46px;text-align:center;margin:8px 0 0}
+#quizOverlay .res-card{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:20px;margin:18px 0}
+#quizOverlay .res-card p{margin:0 0 10px;font-size:15.5px;color:#3c4038}
+#quizOverlay .res-card p:last-child{margin:0}
+#quizOverlay .res-card .reassure{font-family:'Lora';font-style:italic;color:var(--verde-700);font-size:16px}
+#quizOverlay .bars{margin:16px 0}
+#quizOverlay .bar{margin-bottom:9px}
+#quizOverlay .bar .bl{display:flex;justify-content:space-between;font-size:12.5px;font-weight:700;color:var(--grafito);margin-bottom:3px;font-family:'Syne'}
+#quizOverlay .bar .track{height:9px;background:var(--crema-2);border-radius:99px;overflow:hidden}
+#quizOverlay .bar .fill{height:100%;border-radius:99px;background:var(--salvia);transition:width .8s ease}
+#quizOverlay .bar.dom .fill{background:linear-gradient(90deg,var(--naranja),#ff7a33)}
+#quizOverlay .actions h4{font-family:'Syne';font-size:16px;color:var(--verde-900);margin:20px 0 10px}
+#quizOverlay .act{display:flex;gap:11px;align-items:flex-start;background:var(--verde-soft);border-radius:13px;padding:13px 15px;margin-bottom:9px;font-size:14.5px}
+#quizOverlay .act .n{font-family:'Syne';font-weight:800;color:#fff;background:var(--verde-500);width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+#quizOverlay .cta-box{border-radius:18px;padding:22px;margin-top:22px;text-align:center;color:#fff}
+#quizOverlay .cta-box.a{background:linear-gradient(150deg,var(--verde-900),var(--verde-700))}
+#quizOverlay .cta-box.b{background:linear-gradient(150deg,var(--salvia),var(--verde-500))}
+#quizOverlay .cta-box .ct-tag{font-family:'Syne';font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.85}
+#quizOverlay .cta-box h3{font-family:'Syne';font-weight:800;font-size:22px;margin:8px 0 8px}
+#quizOverlay .cta-box p{font-size:14px;margin:0 0 16px;opacity:.95}
+#quizOverlay .disclaimer{font-size:11.5px;color:#8a8f80;text-align:center;margin-top:20px;line-height:1.5;font-style:italic}
+#quizOverlay .devnote{font-size:11px;font-family:'Lora';font-style:italic;color:#b08968;text-align:center;border-top:1px dashed var(--linea);margin-top:24px;padding-top:14px}
+
+</style>
+<div id="quizOverlay">
+  <button class="quizClose" onclick="closeQuiz()" aria-label="Cerrar">✕</button>
+  <div class="app">
+  <div class="topbar">
+    <div class="logo"><div class="pin"></div><b>Tu Ruta <span>GLP-1</span> Natural</b></div>
+  </div>
+  <div id="progressWrap" style="display:none">
+    <div class="progress"><i id="bar"></i></div>
+    <div class="qcount" id="qcount"></div>
+  </div>
+
+  <!-- WELCOME -->
+  <div class="screen welcome active" id="screen-welcome">
+    <div class="eyebrow">Test funcional · 2 minutos</div>
+    <h1>¿Por qué tu cuerpo <em>guarda grasa</em> aunque te esfuerces?</h1>
+    <p>No es falta de voluntad. Es biología: la forma en que tu intestino, tu insulina y tu GLP-1 se comunican entre sí.</p>
+    <p>Responde 11 preguntas y descubre tu <b>perfil metabólico funcional</b> y qué necesita tu cuerpo para empezar a activar su GLP-1 nativo.</p>
+    <div class="quote">"Tu cuerpo sabe quemar grasa. Solo necesita la señal correcta."</div>
+    <div class="meta">Diseñado por el Dr. Héctor Bernal · ActivaMe</div>
+    <div class="nav"><button class="btn btn-primary" onclick="start()">Descubrir mi perfil →</button></div>
+  </div>
+
+  <!-- QUESTION -->
+  <div class="screen" id="screen-q">
+    <div class="qhead" id="qhead"></div>
+    <div class="qhelp" id="qhelp"></div>
+    <div class="opts" id="opts"></div>
+    <div class="nav">
+      <button class="btn btn-ghost" onclick="prev()">←</button>
+      <button class="btn btn-primary" id="nextBtn" onclick="next()" disabled>Siguiente</button>
+    </div>
+  </div>
+
+  <!-- CAPTURE -->
+  <div class="screen" id="screen-capture">
+    <div class="qhead">Tu perfil está listo ✦</div>
+    <p class="qhelp">¿A dónde te enviamos tu <b>perfil metabólico funcional</b> completo y tus primeros pasos personalizados?</p>
+    <div class="field"><label>Nombre</label><input id="f-name" placeholder="¿Cómo te llamas?" oninput="checkCapture()"></div>
+    <div class="field"><label>Correo electrónico</label><input id="f-email" type="email" placeholder="tu@correo.com" oninput="checkCapture()"></div>
+    <div class="field"><label>WhatsApp</label><input id="f-wa" type="tel" placeholder="+52 614 000 0000" oninput="checkCapture()"></div>
+    <label class="consent"><input type="checkbox" id="f-consent" onchange="checkCapture()"><span>Acepto recibir mi perfil y contenido educativo, y el <a href="#" onclick="return false">Aviso de Privacidad</a> conforme a la LFPDPPP.</span></label>
+    <div class="nav">
+      <button class="btn btn-ghost" onclick="backToLastQ()">←</button>
+      <button class="btn btn-primary" id="capBtn" onclick="showResult()" disabled>Ver mi resultado →</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen result" id="screen-result">
+    <div class="res-pheno-ico" id="r-ico"></div>
+    <div class="res-badge">Tu perfil metabólico funcional</div>
+    <div class="res-name" id="r-name"></div>
+    <div class="res-card">
+      <p class="reassure" id="r-reassure"></p>
+      <p id="r-explain"></p>
+    </div>
+    <div class="bars" id="r-bars"></div>
+    <div class="actions">
+      <h4>3 cosas que puedes hacer hoy mismo</h4>
+      <div id="r-actions"></div>
+    </div>
+    <div class="cta-box" id="r-cta"></div>
+    <p class="disclaimer">Este perfil es una orientación educativa basada en el marco funcional ActivaMe. <b>No es un diagnóstico médico</b> ni sustituye una valoración clínica. Cualquier decisión de tratamiento o estudio debe realizarse con tu médico.</p>
+    <div class="nav" style="padding-top:14px"><button class="btn btn-ghost" style="flex:1" onclick="restart()">↺ Repetir test</button></div>
+    <div class="devnote">Prototipo de diseño · La lógica de scoring, segmentación Canal A/B y captura ya está programada y funcionando. Conéctalo a Supabase + WhatsApp para producción.</div>
+  </div>
+</div>
+
+</div>
+<script>
+
+/* ===== QUIZ FUNCIONAL GLP-1 · lógica clínica =====
+   Dimensiones:
+   D = Duodeno / hambre impulsada por insulina (estímulo proximal)
+   I = Íleon / déficit de saciedad (señal GLP-1 distal baja)
+   L = Bloqueo lipolítico / resistencia a la insulina  (FLAG clínico)
+   M = Microbiota / inflamación
+   B = Conducta alimentaria / ritmo circadiano
+*/
+const QUESTIONS = [
+  { q:"¿Qué tan seguido sientes hambre entre comidas?", help:"Piensa en un día normal entre semana.",
+    o:[ {t:"Casi nunca, llego bien a la siguiente comida",e:"😌",s:{}},
+        {t:"A veces, sobre todo por la tarde",e:"🙂",s:{D:1}},
+        {t:"Muy seguido, picoteo entre comidas",e:"😣",s:{D:2,L:1}},
+        {t:"Casi siempre tengo hambre",e:"😩",s:{D:3,L:2}} ]},
+  { q:"Cuando te da hambre, ¿qué se te antoja más?", help:"Tu antojo más frecuente y real.",
+    o:[ {t:"Algo con proteína o grasa (huevo, queso, nueces)",e:"🥚",s:{}},
+        {t:"Algo salado (botana, papas)",e:"🥨",s:{D:1,M:1}},
+        {t:"Pan, tortilla, arroz o pasta",e:"🍞",s:{D:2}},
+        {t:"Algo dulce o azucarado",e:"🍫",s:{D:3,L:1}} ]},
+  { q:"¿Cómo amaneces de energía, en ayunas, antes de desayunar?", help:"Tu cuerpo quemando grasa de noche te da energía matutina.",
+    o:[ {t:"Con energía, despierto fresca/o",e:"☀️",s:{}},
+        {t:"Más o menos, tardo en arrancar",e:"🌤️",s:{L:1}},
+        {t:"Pesada/o, sin pilas hasta que como",e:"🥱",s:{L:2,B:1}},
+        {t:"Despierto con hambre y sin energía",e:"😴",s:{L:3,D:1}} ]},
+  { q:"Después de comer, ¿cuánto tiempo te sientes satisfecha/o?", help:"La saciedad real viene de la señal GLP-1 del íleon.",
+    o:[ {t:"Varias horas, sin pensar en comida",e:"💪",s:{}},
+        {t:"Un par de horas y vuelve el hambre",e:"⏳",s:{I:1}},
+        {t:"Poco, al rato ya quiero algo más",e:"🔁",s:{I:2,D:1}},
+        {t:"Casi nunca me siento llena/o",e:"🕳️",s:{I:3,L:1}} ]},
+  { q:"¿Sientes inflamación, distensión o gases con frecuencia?", help:"Señal del estado de tu microbiota.",
+    o:[ {t:"Casi nunca",e:"✅",s:{}},
+        {t:"De vez en cuando",e:"🤔",s:{M:1}},
+        {t:"Varias veces por semana",e:"🎈",s:{M:2}},
+        {t:"Casi todos los días",e:"😖",s:{M:3}} ]},
+  { q:"En una semana normal, ¿cuántos tipos distintos de plantas comes?", help:"Verduras, frutas, leguminosas, semillas, hierbas. Cuenta variedad, no cantidad.",
+    o:[ {t:"Muchos, busco variedad (20+)",e:"🌿",s:{}},
+        {t:"Bastantes (10–20)",e:"🥗",s:{M:1}},
+        {t:"Pocos, como casi siempre lo mismo (5–10)",e:"🥦",s:{M:2}},
+        {t:"Muy pocos, casi no como vegetales",e:"🍟",s:{M:3,L:1}} ]},
+  { q:"¿A qué hora sueles hacer tu última comida del día?", help:"Comer tarde mantiene encendida la señal equivocada.",
+    o:[ {t:"Antes de las 7 pm",e:"🌅",s:{}},
+        {t:"Entre 7 y 9 pm",e:"🌇",s:{B:1}},
+        {t:"Después de las 9 pm",e:"🌃",s:{B:2,L:1}},
+        {t:"Suelo picar hasta antes de dormir",e:"🌙",s:{B:3,L:1,D:1}} ]},
+  { q:"¿Comes por estrés, emoción o aburrimiento?", help:"Sé honesta/o, esto orienta mucho el plan.",
+    o:[ {t:"Rara vez, como por hambre real",e:"🧘",s:{}},
+        {t:"A veces, en días pesados",e:"😐",s:{B:1}},
+        {t:"Seguido, la comida me calma",e:"😶‍🌫️",s:{B:2}},
+        {t:"Muy seguido, es mi válvula de escape",e:"😢",s:{B:3}} ]},
+  { q:"¿Cómo describirías tu sueño?", help:"El sueño regula insulina y apetito.",
+    o:[ {t:"Duermo bien y reparador",e:"😴",s:{}},
+        {t:"Aceptable, podría ser mejor",e:"🛏️",s:{B:1}},
+        {t:"Me cuesta dormir o despierto cansada/o",e:"🥴",s:{B:2,L:1}},
+        {t:"Duermo mal casi siempre",e:"⏰",s:{B:3,L:2}} ]},
+  { q:"Con tu peso, ¿con cuál te identificas más?", help:"La pregunta clave sobre tu metabolismo.",
+    o:[ {t:"Bajo de peso cuando me lo propongo",e:"📉",s:{}},
+        {t:"Bajo pero lo recupero rápido (efecto rebote)",e:"🪀",s:{L:2,I:1}},
+        {t:"Me cuesta bajar aunque coma poco",e:"🧱",s:{L:3}},
+        {t:"Subo con facilidad y casi no bajo",e:"⚓",s:{L:3,I:1}} ]},
+  { q:"¿Has usado o usas medicamentos GLP-1 (Ozempic, Saxenda, Mounjaro, Wegovy)?", help:"Esto define cómo te acompañamos.",
+    o:[ {t:"Sí, actualmente los uso",e:"💉",s:{},flag:"glp1_actual"},
+        {t:"Los usé antes y los dejé",e:"⏮️",s:{},flag:"glp1_previo"},
+        {t:"No, pero me interesa saber si los necesito",e:"❓",s:{},flag:"glp1_interes"},
+        {t:"No, prefiero un camino natural",e:"🌱",s:{},flag:"glp1_natural"} ]}
+];
+
+// segmentación final (no puntúa fenotipo, define canal)
+const SEG = [
+  { q:"¿Dónde vives?", help:"Para ofrecerte la mejor opción de acompañamiento.", key:"loc",
+    o:[ {t:"Chihuahua o alrededores",e:"📍",v:"local"},
+        {t:"Otra parte de México",e:"🇲🇽",v:"mx"},
+        {t:"Fuera de México",e:"🌎",v:"intl"} ]},
+  { q:"¿Qué buscas en este momento?", help:"Tu prioridad de hoy.", key:"intent",
+    o:[ {t:"Entender qué le pasa a mi cuerpo",e:"🧠",v:"entender"},
+        {t:"Bajar grasa sin perder músculo",e:"🔥",v:"grasa"},
+        {t:"Acompañamiento médico completo",e:"🩺",v:"medico"} ]}
+];
+
+const PHENO = {
+  D:{ ico:"🔴", name:"Duodeno Encendido",
+    reassure:"Tu hambre no es debilidad: es una señal mal calibrada.",
+    explain:"Tu intestino proximal (el duodeno) está dominando la conversación metabólica. Recibe el alimento demasiado rápido y dispara señales de hambre y picos de glucosa que te dejan picando todo el día. La buena noticia: esta señal se puede 'apagar' cambiando el orden y la velocidad con la que comes, y dándole fibra antes de las comidas.",
+    actions:["Empieza cada comida con verdura o fibra, y deja los carbohidratos para el final (carb-last).","Toma Fibra Inteligente 3–5 min antes del desayuno y la comida.","Camina 10 minutos después de comer para frenar el pico de glucosa."] },
+  I:{ ico:"🟡", name:"Íleon en Pausa",
+    reassure:"No es que comas mucho: es que tu cuerpo no recibe la señal de 'ya basta'.",
+    explain:"Tu intestino distal (el íleon) no está liberando suficiente GLP-1, la hormona natural de la saciedad. Por eso comes y al rato vuelves a tener hambre. El objetivo es 'despertar' esa señal: llevar nutrientes correctos hasta el final del intestino para que tu propio cuerpo produzca el GLP-1 que necesitas.",
+    actions:["Aumenta proteína y fibra fermentable en cada comida para estimular el íleon.","Toma Fibra Inteligente antes de desayuno y comida para alimentar la señal distal.","Evita el picoteo: deja que pasen las horas entre comidas para reentrenar la saciedad."] },
+  L:{ ico:"🟠", name:"Bloqueo Lipolítico",
+    reassure:"Tu cuerpo sí puede quemar grasa. Hoy hay un freno hormonal, y se puede soltar.",
+    explain:"Las señales apuntan a resistencia a la insulina: tu insulina alta mantiene 'bloqueada' la quema de grasa (la lipólisis), por eso te cuesta bajar aunque te esfuerces. Este es el perfil que más se beneficia de una valoración con laboratorios (insulina, HOMA-IR, TG/HDL) para medir el bloqueo y diseñar un plan preciso para soltarlo.",
+    actions:["Prioriza ventana de alimentación temprana: intenta cenar antes de las 7 pm.","Camina 10–15 min después de cada comida para bajar la carga de insulina.","Considera medir tu insulina y HOMA-IR: son la foto real de tu metabolismo."] },
+  M:{ ico:"🟢", name:"Eje Microbiota–Inflamación",
+    reassure:"Tu intestino te está pidiendo diversidad, no restricción.",
+    explain:"La inflamación y los síntomas digestivos sugieren un desequilibrio en tu microbiota. Una microbiota empobrecida produce inflamación de bajo grado que sabotea tus señales metabólicas. La estrategia es nutrir tu ecosistema intestinal con diversidad vegetal y fibras que alimenten a las bacterias correctas.",
+    actions:["Apunta a 30 tipos distintos de plantas por semana (variedad, no cantidad).","Incorpora fibra fermentable: Fibra Inteligente antes de las comidas principales.","Reduce ultraprocesados una comida a la vez, sin restricción extrema."] },
+  B:{ ico:"🔵", name:"Reloj Metabólico Desajustado",
+    reassure:"No es solo qué comes: es cuándo, y cómo descansas.",
+    explain:"Tus hábitos de horario, sueño y manejo del estrés están desincronizando tu reloj metabólico. Comer tarde, dormir mal o comer por emoción mantienen encendidas las señales equivocadas. Reordenar tu ritmo circadiano suele desbloquear resultados que ninguna dieta logró.",
+    actions:["Cierra tu ventana de alimentación temprano: desayuno con luz de mañana, cena antes de 7 pm.","Sal a caminar en ayunas con luz solar para reajustar tu reloj.","Antes de comer por emoción, espera 10 min y bebe agua: rompe el automático."] }
+};
+
+/* ===== motor ===== */
+let idx=0;                 // índice global (0..10 clínicas, 11..12 segmentación)
+let answers=[];            // respuestas elegidas
+const TOTAL = QUESTIONS.length + SEG.length;
+const score={D:0,I:0,L:0,M:0,B:0};
+let flags={};
+let seg={};
+
+function $(id){return document.getElementById(id)}
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo(0,0)}
+
+function start(){ idx=0; renderQ(); $('progressWrap').style.display='block'; show('screen-q'); }
+
+function renderQ(){
+  const isSeg = idx >= QUESTIONS.length;
+  const item = isSeg ? SEG[idx-QUESTIONS.length] : QUESTIONS[idx];
+  $('bar').style.width = ((idx)/(TOTAL))*100 + '%';
+  $('qcount').textContent = `Pregunta ${idx+1} de ${TOTAL}`;
+  $('qhead').textContent = item.q;
+  $('qhelp').textContent = item.help||'';
+  const wrap=$('opts'); wrap.innerHTML='';
+  item.o.forEach((op,i)=>{
+    const el=document.createElement('button');
+    el.className='opt'+(answers[idx]===i?' sel':'');
+    el.innerHTML=`<span class="dot"></span><span class="emo">${op.e}</span><span>${op.t}</span>`;
+    el.onclick=()=>{ answers[idx]=i; renderQ(); };
+    wrap.appendChild(el);
+  });
+  $('nextBtn').disabled = answers[idx]===undefined;
+  $('nextBtn').textContent = idx===TOTAL-1 ? 'Casi listo →' : 'Siguiente';
+}
+
+function next(){
+  if(answers[idx]===undefined) return;
+  if(idx < TOTAL-1){ idx++; renderQ(); }
+  else { goCapture(); }
+}
+function prev(){ if(idx>0){ idx--; renderQ(); } else { show('screen-welcome'); $('progressWrap').style.display='none'; } }
+
+function goCapture(){ $('bar').style.width='100%'; show('screen-capture'); checkCapture(); }
+function backToLastQ(){ idx=TOTAL-1; renderQ(); show('screen-q'); }
+
+function checkCapture(){
+  const ok = $('f-name').value.trim() && $('f-email').value.includes('@') &&
+             $('f-wa').value.trim().length>=8 && $('f-consent').checked;
+  $('capBtn').disabled=!ok;
+}
+
+function compute(){
+  // reset
+  Object.keys(score).forEach(k=>score[k]=0); flags={}; seg={};
+  QUESTIONS.forEach((qq,qi)=>{
+    const op=qq.o[answers[qi]];
+    if(op){ if(op.s) for(const k in op.s) score[k]+=op.s[k];
+            if(op.flag) flags[op.flag]=true; }
+  });
+  SEG.forEach((sq,si)=>{ const op=sq.o[answers[QUESTIONS.length+si]]; if(op) seg[sq.key]=op.v; });
+
+  // fenotipo dominante (desempate prioriza L por relevancia clínica)
+  const order=['L','I','D','M','B'];
+  let dom=order[0];
+  order.forEach(k=>{ if(score[k]>score[dom]) dom=k; });
+  return dom;
+}
+
+// regla de segmentación: SOLO 2 opciones, por ubicación
+// Chihuahua -> consulta presencial con laboratorio (A)
+// foráneos  -> acompañamiento con Ana (B)
+function channel(dom){
+  return seg.loc==='local' ? 'A' : 'B';
+}
+
+function showResult(){
+  const dom=compute();
+  const p=PHENO[dom];
+  $('r-ico').textContent=p.ico;
+  $('r-name').textContent=p.name;
+  $('r-reassure').textContent='"'+p.reassure+'"';
+  $('r-explain').textContent=p.explain;
+
+  // barras
+  const max=Math.max(1,score.D,score.I,score.L,score.M,score.B);
+  const labels={D:'Señal duodeno (hambre)',I:'Señal íleon (saciedad)',L:'Bloqueo lipolítico',M:'Microbiota / inflamación',B:'Ritmo / conducta'};
+  $('r-bars').innerHTML = Object.keys(labels).map(k=>{
+    const pct=Math.round((score[k]/max)*100);
+    return `<div class="bar ${k===dom?'dom':''}"><div class="bl"><span>${labels[k]}</span><span>${k===dom?'PRINCIPAL':''}</span></div><div class="track"><div class="fill" style="width:${pct}%"></div></div></div>`;
+  }).join('');
+
+  // acciones
+  $('r-actions').innerHTML = p.actions.map((a,i)=>`<div class="act"><span class="n">${i+1}</span><span>${a}</span></div>`).join('');
+
+  // CTA segmentado
+  const ch=channel(dom);
+  const name=$('f-name').value.trim().split(' ')[0]||'';
+  let cta;
+  if(ch==='A'){
+    cta=`<div class="ct-tag">Recomendación para ti${name?', '+name:''}</div>
+      <h3>Consulta presencial con laboratorio</h3>
+      <p>Como estás en Chihuahua, tu mejor paso es una valoración presencial con el Dr. Bernal: medimos tu bloqueo real (insulina, HOMA-IR, TG/HDL) y diseñamos tu protocolo para tu perfil ${p.name}.</p>
+      <button class="btn btn-big">Agendar mi consulta →</button>`;
+    $('r-cta').className='cta-box a';
+  } else {
+    cta=`<div class="ct-tag">Tu mejor primer paso${name?', '+name:''}</div>
+      <h3>Acompañamiento con ANA</h3>
+      <p>Tu coach metabólico 24/7 te guía con tu perfil ${p.name}: plan dinámico, seguimiento diario y Fibra Inteligente para empezar a activar tu GLP-1 nativo desde donde estés.</p>
+      <button class="btn btn-big">Empezar con ANA →</button>`;
+    $('r-cta').className='cta-box b';
+  }
+  $('r-cta').innerHTML=cta;
+
+  // payload que iría a Supabase + CRM (visible en consola para tu validación)
+  console.log('LEAD →', {nombre:name, email:$('f-email').value, whatsapp:$('f-wa').value,
+    fenotipo:dom, scores:{...score}, flags, segmentacion:seg, canal:ch});
+
+  show('screen-result');
+}
+
+function restart(){ idx=0; answers=[]; show('screen-welcome'); $('progressWrap').style.display='none'; }
+
+
+function openQuiz(){ document.getElementById('quizOverlay').classList.add('open'); document.body.style.overflow='hidden'; restart(); }
+function closeQuiz(){ document.getElementById('quizOverlay').classList.remove('open'); document.body.style.overflow=''; }
+</script>
+
+
+</body>
+</html>
