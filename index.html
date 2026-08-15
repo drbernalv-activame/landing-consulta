@@ -696,6 +696,13 @@ footer{background:#071f23;color:#6f938c;text-align:center;padding:34px 24px;font
 
 <footer>
   ActivaMe · Tu Ruta GLP-1 Natural · Dr. Héctor Bernal — Chihuahua, México
+  <span style="display:block;margin-top:14px;font-size:.76rem;line-height:1.65;color:#5c7d77">
+    Trasviña y Retes 3904, Col. San Felipe I · Chihuahua, Chih., México · C.P. 31203<br>
+    Tel. <a href="tel:+526145415300" style="color:#5c7d77">614 541 5300</a> ·
+    <a href="mailto:coordinacion@activame.mx" style="color:#5c7d77">coordinacion@activame.mx</a> ·
+    <a href="https://app.activame.mx/privacidad" style="color:#5c7d77" target="_blank" rel="noopener">Aviso de Privacidad</a><br>
+    ActivaMe es nombre comercial de Héctor Mario Bernal Velázquez.
+  </span>
 </footer>
 
 <script>
@@ -901,5 +908,30 @@ function renderResult(){
   document.querySelectorAll('.result-seg .seg-cta').forEach(a=>a.addEventListener('click',()=>closeQuiz()));
 }
 </script>
+
+<script>
+/* Gino · pasa el id de cita a Stripe como client_reference_id */
+(function () {
+  var c = new URLSearchParams(location.search).get('c');
+  if (!c) return;
+
+  function marcar() {
+    var links = document.querySelectorAll('a[href*="buy.stripe.com"], a[href*="checkout.stripe.com"]');
+    for (var i = 0; i < links.length; i++) {
+      var href = links[i].getAttribute('href');
+      if (!href || href.indexOf('client_reference_id=') !== -1) continue;
+      links[i].setAttribute(
+        'href',
+        href + (href.indexOf('?') === -1 ? '?' : '&') +
+        'client_reference_id=' + encodeURIComponent(c)
+      );
+    }
+  }
+
+  marcar();
+  new MutationObserver(marcar).observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
 </body>
 </html>
