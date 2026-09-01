@@ -265,6 +265,85 @@ section{position:relative;padding:clamp(70px,11vh,140px) 0}
 .accion .fine{margin-top:1.6rem;font-size:.9rem;color:#9fc0b9;max-width:44ch;margin-left:auto;margin-right:auto}
 footer{background:#071f23;color:#6f938c;text-align:center;padding:34px 24px;font-size:.85rem}
 
+/* ---------- STICKY CTA BAR ---------- */
+/* Reserva de scroll para que la barra inferior nunca tape el footer.
+   Va en <body> (no en <main>) porque el footer vive fuera de <main>:
+   padding en <main> solo separaria accion/footer, no liberaria la barra. */
+body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
+
+#ctaSentinel{position:absolute;top:240px;left:0;width:1px;height:1px;pointer-events:none}
+
+.sticky-cta{
+  position:fixed;left:0;right:0;z-index:90; /* quiz-overlay = 100, siempre por debajo */
+  display:flex;justify-content:center;
+  padding:12px 16px;
+  background:rgba(10,47,53,.92);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:0;pointer-events:none;
+  transition:opacity .18s ease-out,transform .18s ease-out;
+}
+.sticky-cta[data-pos="bottom"]{
+  bottom:0;border-top:1px solid rgba(255,255,255,.14);
+  transform:translateY(10px);
+  padding-bottom:calc(12px + env(safe-area-inset-bottom));
+}
+.sticky-cta[data-pos="top"]{
+  top:0;border-bottom:1px solid rgba(255,255,255,.14);
+  transform:translateY(-10px);
+}
+.sticky-cta.is-visible{opacity:1;pointer-events:auto;transform:translateY(0)}
+.sticky-cta__inner{
+  display:flex;flex-wrap:nowrap;align-items:stretch;gap:8px;
+  width:100%;max-width:var(--maxw);
+}
+.sticky-cta__btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:0 16px;border-radius:999px;
+  text-decoration:none;line-height:1.15;white-space:nowrap;
+  transition:transform .18s ease-out,border-color .18s ease-out,background .18s ease-out;
+}
+.sticky-cta__btn--primary{
+  flex:0 0 62%;
+  background:var(--amber);color:#26140a;
+  font-weight:800;font-size:.95rem;letter-spacing:-.015em;
+  padding:0 12px;
+  border:1px solid var(--amber);
+}
+.sticky-cta__btn--secondary{
+  flex:1 1 auto;min-width:0;
+  background:transparent;color:#fdfaf2;
+  font-weight:400;font-size:.9rem;
+  padding:0 12px;
+  border:1px solid rgba(255,255,255,.42);
+}
+.sticky-cta__btn--primary:hover{transform:translateY(-1px)}
+.sticky-cta__btn--secondary:hover{border-color:var(--amber-glow);background:rgba(255,255,255,.06)}
+.sticky-cta__btn:focus-visible{outline:3px solid var(--amber-glow);outline-offset:3px}
+.sticky-cta__short{display:none}
+/* .is-compact / .is-tight las pone el JS midiendo, en dos escalones:
+   1) el secundario abrevia a "Quiz GLP-1"; 2) si aun no cabe, baja el cuerpo. */
+.sticky-cta.is-compact .sticky-cta__long{display:none}
+.sticky-cta.is-compact .sticky-cta__short{display:inline}
+.sticky-cta.is-tight .sticky-cta__btn{padding:0 9px}
+.sticky-cta.is-tight .sticky-cta__btn--primary{font-size:.8rem;letter-spacing:-.02em}
+.sticky-cta.is-tight .sticky-cta__btn--secondary{font-size:.78rem}
+
+@media(min-width:768px){
+  .sticky-cta__inner{justify-content:center}
+  .sticky-cta__btn{padding:0 26px}
+  .sticky-cta__btn--primary{flex:0 0 auto;font-size:1rem}
+  .sticky-cta__btn--secondary{flex:0 0 auto;font-size:.95rem}
+}
+/* Fallback sin JS: en pantallas angostas el secundario abrevia en vez de cortarse.
+   Con JS activo, .is-compact decide midiendo de verdad (ver fitSecondary). */
+@media(max-width:420px){
+  .sticky-cta__long{display:none}
+  .sticky-cta__short{display:inline}
+}
+@media(min-width:421px){
+  .sticky-cta__long{display:inline}
+}
+
 /* ---------- responsive ---------- */
 @media(max-width:880px){
   body{font-size:17px}
@@ -286,6 +365,8 @@ footer{background:#071f23;color:#6f938c;text-align:center;padding:34px 24px;font
 @media(prefers-reduced-motion:reduce){
   .reveal{transition:none;opacity:1;transform:none}
   .draw{transition:none;stroke-dashoffset:0}
+  .sticky-cta{transition:none}
+  .sticky-cta[data-pos="bottom"],.sticky-cta[data-pos="top"]{transform:none}
   *{animation:none!important}
 }
 
@@ -370,6 +451,8 @@ footer{background:#071f23;color:#6f938c;text-align:center;padding:34px 24px;font
   <div class="wrap"><div class="brand"><span class="pin"></span>ActivaMe</div></div>
 </div>
 
+<main id="main">
+
 <!-- MÓDULO 0 · HERO -->
 <section class="hero" id="inicio">
   <div class="wrap">
@@ -389,6 +472,10 @@ footer{background:#071f23;color:#6f938c;text-align:center;padding:34px 24px;font
   </div>
   <div class="scroll-cue"><span>Desliza</span><span class="dot"></span></div>
 </section>
+
+<!-- Centinela de la barra CTA: fuera de flujo (position:absolute), anclado a
+     240px del inicio del documento. Al salir del viewport por arriba, la barra aparece. -->
+<div id="ctaSentinel" aria-hidden="true"></div>
 
 <!-- MÓDULO 1 · PROBLEMA -->
 <section class="problema" id="problema">
@@ -678,12 +765,28 @@ footer{background:#071f23;color:#6f938c;text-align:center;padding:34px 24px;font
     <h2 class="reveal">No vendemos inyecciones. Diseñamos fisiología.</h2>
     <p class="sub reveal" style="--d:.08s">Si quieres entender qué apagó tu GLP-1 y cómo reactivarlo, el primer paso es realizar este pequeño quiz. Y si quieres saber si nuestro programa es para ti, puedes agendar una consulta médica para conocer tu caso.</p>
     <div class="cta-group reveal" style="--d:.14s">
-      <a class="cta" href="#quiz">Hacer el quiz GLP-1</a>
-      <a class="cta-secondary" href="https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05">Agendar consulta <span class="price">$1,000 MXN</span></a>
+      <a class="cta" href="https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05"
+         data-cta-location="footer" data-cta-target="consulta">Apartar mi consulta <span class="price">$1,000</span></a>
+      <a class="cta-secondary" href="#quiz"
+         data-cta-location="footer" data-cta-target="quiz">Hacer el quiz GLP-1</a>
     </div>
-    <p class="fine reveal" style="--d:.2s">La consulta es un servicio médico independiente, no un anticipo del programa. Sales con claridad sobre tu fisiología, decidas o no continuar.</p>
+    <p class="fine reveal" style="--d:.2s">Tu lugar se aparta al momento del pago. Es un servicio médico independiente, no un anticipo del programa. Si necesitas mover tu cita, puedes reagendar sin costo hasta 24 h antes.</p>
   </div>
 </section>
+
+</main>
+
+<!-- STICKY CTA BAR -->
+<nav class="sticky-cta" id="stickyCta" data-pos="bottom" aria-label="Acciones principales">
+  <div class="sticky-cta__inner">
+    <a class="sticky-cta__btn sticky-cta__btn--primary"
+       href="https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05"
+       data-cta-location="sticky_bar" data-cta-target="consulta">Apartar mi consulta · $1,000</a>
+    <a class="sticky-cta__btn sticky-cta__btn--secondary"
+       href="#quiz"
+       data-cta-location="sticky_bar" data-cta-target="quiz"><span class="sticky-cta__long">Hacer el quiz GLP-1</span><span class="sticky-cta__short">Quiz GLP-1</span></a>
+  </div>
+</nav>
 
 <!-- QUIZ OVERLAY -->
 <div class="quiz-overlay" id="quizOverlay" aria-modal="true" role="dialog">
@@ -706,6 +809,148 @@ footer{background:#071f23;color:#6f938c;text-align:center;padding:34px 24px;font
 </footer>
 
 <script>
+/* ================= POSICIÓN DE LA BARRA CTA ================= */
+/* Voltear estas dos constantes cambia la posición sin tocar nada más. */
+const MOBILE_POSITION   = 'bottom';  // < 768px
+const DESKTOP_POSITION  = 'top';     // >= 768px
+const STICKY_BREAKPOINT = 768;       // px
+const STICKY_REVEAL_PX  = 240;       // scroll necesario para que aparezca
+
+/* ================= TRACKING ================= */
+/* TODO(analytics): el sitio no tiene proveedor cargado (ni GA4, ni GTM, ni Meta,
+   ni Plausible). Por ahora track() solo escribe en consola. Cuando se decida el
+   proveedor, el único cambio necesario es el cuerpo de esta función — los puntos
+   de llamada ya están colocados y son estables.
+
+   Eventos que emite esta página:
+     cta_view       { location:'sticky_bar' }                          1 vez
+     cta_click      { location, target }                               location: sticky_bar|footer|quiz_result
+     checkout_start { source }                                          target consulta
+     quiz_start     { source }                                          target quiz
+
+   checkout_paid { source, amount:1000 } NO se emite desde el cliente. Tiene que
+   venir del webhook de Stripe (checkout.session.completed), porque la página de
+   gracias miente: se recarga, se comparte y se cierra antes de cargar.
+
+   TODO(backend): hoy no existe webhook y `source` no llega a Stripe. El Payment
+   Link solo transporta client_reference_id, que ya está ocupado por el id de cita
+   (script "Gino" al final del archivo). Para atribuir el pago a su origen hacen
+   falta las dos piezas que van en el commit de unificación agenda→pago:
+     1. crear la Checkout Session en servidor con metadata.source, o acordar un
+        formato compuesto para client_reference_id (p.ej. "<citaId>.<source>");
+     2. un endpoint de webhook que emita checkout_paid al recibir
+        checkout.session.completed.
+   Deliberadamente no se toca client_reference_id aquí para no romper Gino. */
+function track(event, props){
+  const payload = Object.assign({ event: event, ts: new Date().toISOString() }, props || {});
+  console.log('[track]', event, payload);
+}
+
+/* ================= STICKY CTA BAR ================= */
+(function(){
+  const barEl      = document.getElementById('stickyCta');
+  const sentinelEl = document.getElementById('ctaSentinel');
+  if(!barEl) return;
+
+  const mq = window.matchMedia('(min-width:' + STICKY_BREAKPOINT + 'px)');
+  // Una sola fuente de verdad para el umbral (el CSS lleva 240px como default sin JS)
+  if(sentinelEl) sentinelEl.style.top = STICKY_REVEAL_PX + 'px';
+
+  function applyPosition(){
+    const pos = mq.matches ? DESKTOP_POSITION : MOBILE_POSITION;
+    barEl.setAttribute('data-pos', pos);
+    syncSpace();
+  }
+
+  /* Reserva de scroll: solo cuando la barra está abajo y ya es visible. */
+  function syncSpace(){
+    const bottom = barEl.getAttribute('data-pos') === 'bottom';
+    const shown  = barEl.classList.contains('is-visible');
+    if(bottom && shown){
+      document.documentElement.style.setProperty('--sticky-h', barEl.offsetHeight + 'px');
+      document.body.classList.add('has-sticky-bottom');
+    } else {
+      document.body.classList.remove('has-sticky-bottom');
+    }
+  }
+
+  let viewed = false;
+  function reveal(){
+    if(barEl.classList.contains('is-visible')) return;  // una vez visible, se queda
+    barEl.classList.add('is-visible');
+    syncSpace();
+    if(!viewed){ viewed = true; track('cta_view', { location:'sticky_bar' }); }
+  }
+
+  /* "Si no cabe, el secundario abrevia": se mide de verdad, no se adivina por
+     breakpoint. Al quitar .is-compact el label largo vuelve a pintarse, así que
+     scrollWidth refleja el texto completo y la comparación es fiable. */
+  const secEl = barEl.querySelector('.sticky-cta__btn--secondary');
+  const priEl = barEl.querySelector('.sticky-cta__btn--primary');
+  function overflows(el){ return el && el.scrollWidth > el.clientWidth + 1; }
+  function fitSecondary(){
+    if(!secEl) return;
+    barEl.classList.remove('is-compact','is-tight');
+    if(!overflows(secEl) && !overflows(priEl)) return;
+    barEl.classList.add('is-compact');                 // 1) "Quiz GLP-1"
+    if(overflows(secEl) || overflows(priEl)) barEl.classList.add('is-tight'); // 2) cuerpo menor
+  }
+
+  applyPosition();
+  fitSecondary();
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(fitSecondary);
+  if(mq.addEventListener) mq.addEventListener('change', applyPosition);
+  else if(mq.addListener) mq.addListener(applyPosition);
+
+  if(typeof ResizeObserver === 'function'){
+    new ResizeObserver(function(){ syncSpace(); fitSecondary(); }).observe(barEl);
+  } else {
+    window.addEventListener('resize', fitSecondary);
+  }
+
+  /* IntersectionObserver sobre el centinela. Sin listener de scroll.
+     Si el observer no existe o el centinela falta, la barra se muestra. */
+  if(!sentinelEl || typeof IntersectionObserver !== 'function'){
+    reveal();
+  } else {
+    try{
+      const stickyObserver = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          // el centinela salió del viewport por arriba => pasamos STICKY_REVEAL_PX
+          if(!e.isIntersecting && e.boundingClientRect.top <= 0) reveal();
+        });
+      }, { threshold: 0 });
+      stickyObserver.observe(sentinelEl);
+      // Carga con la página ya scrolleada (recarga, deep link, restauración)
+      if(window.scrollY > STICKY_REVEAL_PX) reveal();
+    }catch(err){
+      reveal();  // nunca oculta
+    }
+  }
+
+  /* El teclado virtual empuja los fixed inferiores: mientras el quiz esté
+     abierto, la barra se retira (además ya vive por debajo del overlay). */
+  const overlayEl = document.getElementById('quizOverlay');
+  if(overlayEl && typeof MutationObserver === 'function'){
+    new MutationObserver(function(){
+      barEl.style.display = overlayEl.classList.contains('open') ? 'none' : '';
+    }).observe(overlayEl, { attributes:true, attributeFilter:['class'] });
+  }
+})();
+
+/* ================= CLICS DE CTA (los 3 orígenes) ================= */
+/* Delegado en document: cubre también los CTA que el quiz inyecta al final. */
+document.addEventListener('click', function(e){
+  const el = e.target.closest && e.target.closest('[data-cta-location]');
+  if(!el) return;
+  const loc    = el.getAttribute('data-cta-location');
+  const target = el.getAttribute('data-cta-target');
+
+  track('cta_click', { location: loc, target: target });
+  if(target === 'consulta')  track('checkout_start', { source: loc });
+  else if(target === 'quiz') track('quiz_start',     { source: loc });
+}, true);
+
 /* ---------- reveal observer ---------- */
 const io=new IntersectionObserver((entries)=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); } });
@@ -881,8 +1126,8 @@ function renderResult(){
   console.log("LEAD QUIZ GLP-1 →", payload);  // aquí se enviará a Supabase + CRM
 
   const seg = lead.chihuahua
-    ? { h:"Estás en Chihuahua 📍", t:"Tu siguiente paso ideal es una consulta presencial con laboratorio: medimos tu fisiología real (insulina, HOMA-IR, perfil metabólico) y diseñamos tu ruta de reactivación.", cta:"Agendar consulta · $1,000 MXN", href:"https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05" }
-    : { h:"Eres de fuera de Chihuahua 🌎", t:"Podemos acompañarte a distancia con Ana, tu guía metabólica 24/7, que te lleva paso a paso en la reactivación de tu GLP-1 desde donde estés.", cta:"Conocer el acompañamiento con Ana", href:"#programa" };
+    ? { h:"Estás en Chihuahua 📍", t:"Tu siguiente paso ideal es una consulta presencial con laboratorio: medimos tu fisiología real (insulina, HOMA-IR, perfil metabólico) y diseñamos tu ruta de reactivación.", cta:"Apartar mi consulta · $1,000", href:"https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05", target:"consulta" }
+    : { h:"Eres de fuera de Chihuahua 🌎", t:"Podemos acompañarte a distancia con Ana, tu guía metabólica 24/7, que te lleva paso a paso en la reactivación de tu GLP-1 desde donde estés.", cta:"Conocer el acompañamiento con Ana", href:"#programa", target:"programa" };
 
   const dims = ["D","I","L","M","B"].map(k=>`
     <div class="dim-row">
@@ -900,7 +1145,7 @@ function renderResult(){
       <div class="result-seg">
         <h3>${seg.h}</h3>
         <p>${seg.t}</p>
-        <a class="seg-cta" href="${seg.href}">${seg.cta} →</a>
+        <a class="seg-cta" href="${seg.href}" data-cta-location="quiz_result" data-cta-target="${seg.target}">${seg.cta} →</a>
       </div>
       <p class="result-disc">Este perfil es una orientación funcional con fines educativos y no constituye un diagnóstico médico. La interpretación clínica siempre la realiza y firma el médico.</p>
     </div>`;
