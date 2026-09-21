@@ -236,6 +236,17 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:20ch}
 .inc-item .ic{width:44px;height:44px;flex:0 0 44px;border-radius:12px;background:rgba(217,122,52,.12);display:grid;place-items:center;font-size:1.3rem}
 .inc-item h3{font-size:1.05rem;font-family:'Mulish',sans-serif;font-weight:700;letter-spacing:0;color:var(--teal-deep);margin-bottom:.25rem;line-height:1.35}
 .inc-item p{font-size:.93rem;color:var(--ink-soft);line-height:1.55}
+/* Lista compacta dentro de una tarjeta: hereda la tipografia del parrafo
+   para que la tarjeta no cambie de voz respecto a las otras cinco. */
+.inc-mini{list-style:none;margin-top:.7rem;display:grid;gap:.4rem}
+.inc-mini li{
+  font-size:.93rem;color:var(--ink-soft);line-height:1.5;
+  padding-left:17px;position:relative;
+}
+.inc-mini li::before{
+  content:"";position:absolute;left:2px;top:.52em;
+  width:6px;height:6px;border-radius:50%;background:var(--sage);
+}
 
 /* ---------- 6 · INVERSIÓN ---------- */
 .precio{background:radial-gradient(120% 120% at 70% 0%,#11424a 0%,#0a2f35 60%,#08252a 100%);color:var(--cream)}
@@ -647,8 +658,8 @@ body.has-sticky{padding-bottom:0}
       <div class="inc-item reveal" style="--d:.12s">
         <div class="ic">📊</div>
         <div>
-          <h3>Mediciones de composición corporal</h3>
-          <p>Para saber cuánta grasa perdiste y cuánto músculo conservaste. <span class="ph">[Confirmar cuántas mediciones y en qué semanas]</span></p>
+          <h3>Medición de composición corporal cada semana</h3>
+          <p>Con InBody 970, no con una báscula. Cada semana ves cuánta grasa perdiste y cuánto músculo conservaste, y ajustamos con ese dato.</p>
         </div>
       </div>
       <div class="inc-item reveal" style="--d:.14s">
@@ -662,14 +673,20 @@ body.has-sticky{padding-bottom:0}
         <div class="ic">🥗</div>
         <div>
           <h3>Plan de alimentación</h3>
-          <p>Ajustado a ti y a lo que de verdad comes, con la proteína como eje. <span class="ph">[Confirmar si se entrega impreso, en la app o ambos]</span></p>
+          <p>Ajustado a ti y a lo que de verdad comes, con la proteína como eje. Lo recibes impreso y dentro de la app.</p>
         </div>
       </div>
       <div class="inc-item reveal" style="--d:.18s">
-        <div class="ic">👥</div>
+        <div class="ic">💊</div>
         <div>
-          <h3>Comunidad del programa <span class="ph">[confirmar]</span></h3>
-          <p>Grupo de WhatsApp con las personas que van en tu misma generación. <span class="ph">[Confirmar si se incluye y cómo se modera]</span></p>
+          <h3>Programa de suplementación incluido</h3>
+          <p>Diseñado para acompañar al medicamento y proteger tu músculo:</p>
+          <ul class="inc-mini">
+            <li>Fibra inteligente con probióticos Akkermansia</li>
+            <li>Proteína funcional diurna</li>
+            <li>Proteína funcional nocturna</li>
+            <li>Libro «Cómo activar tu GLP-1 nativo»</li>
+          </ul>
         </div>
       </div>
     </div>
