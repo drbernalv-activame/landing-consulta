@@ -196,6 +196,43 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:20ch}
 .mix-bar .habits{flex:0 0 80%;background:var(--sage);color:#123024}
 .mix-bar .pharma{flex:1 1 auto;background:var(--amber);color:#26140a;font-size:.72rem}
 .mix-legend{margin-top:12px;font-size:.82rem;color:#9fc0b9}
+/* medicion semanal: slider ilustrativo 0-10.
+   Las dos barras son proporcion visual, no cifras: por eso las pistas van
+   aria-hidden y el rango expone su estado como "Semana N" via aria-valuetext. */
+.medimos{margin-top:2.2rem;background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:24px 20px}
+.medimos h3{font-size:1.2rem;font-family:'Mulish',sans-serif;font-weight:700;letter-spacing:0;color:var(--teal-deep)}
+.medimos-control{margin-top:1.15rem}
+.medimos-control label{
+  display:block;font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:.2rem;
+}
+/* Reserva el ancho de dos digitos para que pasar de "Semana 9" a "Semana 10"
+   no reacomode nada (CLS = 0 mientras se arrastra). */
+.medimos-control label span{display:inline-block;min-width:2ch}
+.medimos-range{
+  -webkit-appearance:none;appearance:none;display:block;width:100%;height:44px;
+  background:transparent;margin:0;padding:0;cursor:pointer;
+}
+.medimos-range::-webkit-slider-runnable-track{height:6px;border-radius:99px;background:rgba(19,48,45,.14)}
+.medimos-range::-moz-range-track{height:6px;border-radius:99px;background:rgba(19,48,45,.14)}
+.medimos-range::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:26px;height:26px;border-radius:50%;
+  background:var(--amber);border:3px solid var(--paper);
+  box-shadow:0 2px 8px rgba(13,61,69,.35);margin-top:-10px;
+}
+.medimos-range::-moz-range-thumb{
+  width:26px;height:26px;border-radius:50%;background:var(--amber);
+  border:3px solid var(--paper);box-shadow:0 2px 8px rgba(13,61,69,.35);
+}
+.medimos-range:focus{outline:none}
+.medimos-range:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:99px}
+.medimos-bars{margin-top:1.1rem;display:grid;gap:14px}
+.mb-name{display:block;font-size:.9rem;font-weight:700;color:var(--teal-deep);margin-bottom:.4rem}
+.mb-track{height:14px;border-radius:99px;background:rgba(19,48,45,.08);overflow:hidden}
+.mb-fill{height:100%;width:100%;border-radius:99px;transition:width .25s cubic-bezier(.2,.7,.2,1)}
+.mb-fill--grasa{background:linear-gradient(90deg,var(--amber),var(--amber-glow))}
+.mb-fill--musculo{background:linear-gradient(90deg,var(--sage),var(--sage-soft))}
+.medimos-nota{margin-top:1.15rem;font-size:.82rem;color:var(--ink-soft);line-height:1.5}
 /* pilares */
 .pillars{margin-top:2.2rem;display:grid;gap:14px}
 .pillar{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:14px;padding:20px}
@@ -217,6 +254,20 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:20ch}
   font-size:.82rem;font-weight:800;letter-spacing:-.02em;
 }
 .tl-item--fase .tl-num{background:var(--amber);color:#26140a}
+/* Progreso de la ruta. La linea ambar es un ::after que se superpone al
+   conector tenue (::before) del mismo item, asi que hereda su geometria
+   exacta y no hace falta medir nada desde JS. Cada segmento se rellena
+   cuando su semana entra en viewport. */
+.tl-num{opacity:.4;transition:opacity .45s ease,box-shadow .45s ease}
+.tl-item.tl-on .tl-num{opacity:1;box-shadow:0 0 0 4px rgba(217,122,52,.16)}
+.tl-item::after{
+  content:"";position:absolute;left:17px;top:40px;bottom:-12px;width:2px;
+  background:linear-gradient(180deg,var(--amber),var(--amber-glow));
+  transform:scaleY(0);transform-origin:top;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1);
+}
+.tl-item:last-child::after{display:none}
+.tl-item.tl-on::after{transform:scaleY(1)}
 .tl-body{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
 .tl-body .wk{font-size:.7rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--sage);display:block;margin-bottom:.35rem}
 .tl-body h3{font-size:1.02rem;font-family:'Mulish',sans-serif;font-weight:700;letter-spacing:0;color:var(--teal-deep);line-height:1.35}
@@ -335,6 +386,9 @@ body.has-sticky{padding-bottom:0}
   .reveal{transition:none;opacity:1;transform:none}
   .sticky-wa{transition:none}
   .cta{transition:none}
+  /* El progreso de la ruta y las barras siguen cambiando de estado: lo que
+     se quita es el recorrido animado, no la informacion. */
+  .tl-num,.tl-item::after,.mb-fill{transition:none}
   html{scroll-behavior:auto}
 }
 
@@ -355,7 +409,7 @@ body.has-sticky{padding-bottom:0}
   .mix{padding:36px 32px}
   .inc-list{grid-template-columns:1fr 1fr;gap:18px}
   .timeline{grid-template-columns:1fr 1fr;gap:14px 32px}
-  .tl-item::before{display:none}
+  .tl-item::before,.tl-item::after{display:none}
   .price-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:start}
   .price-card--alt{margin-top:0}
   .price-card{padding:34px 30px}
@@ -494,6 +548,27 @@ body.has-sticky{padding-bottom:0}
         <span class="pharma">20%</span>
       </div>
       <p class="mix-legend">Si inviertes esta proporción, el rebote deja de ser un riesgo y se vuelve el resultado esperado.</p>
+    </div>
+
+    <div class="medimos reveal" style="--d:.14s">
+      <h3>Lo que medimos cada semana</h3>
+      <div class="medimos-control">
+        <label for="medimosRango">Semana <span id="medimosSemana">0</span></label>
+        <input class="medimos-range" type="range" id="medimosRango"
+               min="0" max="10" step="1" value="0"
+               aria-describedby="medimosNota">
+      </div>
+      <div class="medimos-bars">
+        <div>
+          <span class="mb-name">Grasa corporal</span>
+          <div class="mb-track" aria-hidden="true"><div class="mb-fill mb-fill--grasa" id="medimosGrasa"></div></div>
+        </div>
+        <div>
+          <span class="mb-name">Masa muscular</span>
+          <div class="mb-track" aria-hidden="true"><div class="mb-fill mb-fill--musculo" id="medimosMusculo"></div></div>
+        </div>
+      </div>
+      <p class="medimos-nota" id="medimosNota">Ilustrativo. Cada cuerpo responde distinto; tu curva real la ves en tu InBody semana a semana.</p>
     </div>
 
     <div class="pillars">
@@ -937,6 +1012,48 @@ function trackCta(location){
     for(var k = 0; k < elementos.length; k++) io.observe(elementos[k]);
   } else {
     for(var m = 0; m < elementos.length; m++) elementos[m].classList.add('visible');
+  }
+
+  /* --- Ruta: nodo tenue -> activo y línea de progreso ---
+     Mismo patrón que .reveal: un IntersectionObserver que marca y suelta.
+     La línea ámbar no se calcula ni se mide; cada semana rellena su propio
+     segmento al entrar en viewport, así que no hay listener de scroll. */
+  var pasos = document.querySelectorAll('.timeline .tl-item');
+  if('IntersectionObserver' in window){
+    var ioRuta = new IntersectionObserver(function(entradas){
+      for(var n = 0; n < entradas.length; n++){
+        if(entradas[n].isIntersecting){
+          entradas[n].target.classList.add('tl-on');
+          ioRuta.unobserve(entradas[n].target);
+        }
+      }
+    }, { rootMargin: '0px 0px -15% 0px', threshold: 0.15 });
+    for(var q = 0; q < pasos.length; q++) ioRuta.observe(pasos[q]);
+  } else {
+    for(var r = 0; r < pasos.length; r++) pasos[r].classList.add('tl-on');
+  }
+
+  /* --- "Lo que medimos cada semana" ---
+     Curva ilustrativa, sin cifras absolutas: la grasa baja de forma
+     progresiva y se desacelera; el músculo queda casi plano. El contraste
+     entre las dos barras es todo el mensaje. */
+  var rango = document.getElementById('medimosRango');
+  if(rango){
+    var etiqueta = document.getElementById('medimosSemana');
+    var barraGrasa = document.getElementById('medimosGrasa');
+    var barraMusculo = document.getElementById('medimosMusculo');
+    var pintarSemana = function(){
+      var semana = parseInt(rango.value, 10);
+      if(isNaN(semana)) semana = 0;
+      var t = semana / 10;
+      barraGrasa.style.width   = (100 - 38 * Math.pow(t, 0.85)).toFixed(1) + '%';
+      barraMusculo.style.width = (100 - 3 * t).toFixed(1) + '%';
+      etiqueta.textContent = semana;
+      // El valor crudo (0-10) no dice nada por sí solo a un lector de pantalla.
+      rango.setAttribute('aria-valuetext', 'Semana ' + semana);
+    };
+    rango.addEventListener('input', pintarSemana);
+    pintarSemana();
   }
 
   /* --- Barra sticky de WhatsApp (solo móvil, aparece tras 240px) --- */
