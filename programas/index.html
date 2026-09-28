@@ -29,7 +29,7 @@
      sistema mientras llegan. -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'">
-<noscript><style>.dosis-ui{display:none}</style></noscript>
+<noscript><style>.dosis-ui,.yt{display:none}</style></noscript>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap"></noscript>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a3d45'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237ba088'/%3E%3C/svg%3E">
 
@@ -212,6 +212,40 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:22ch}
 .mini--dark .ic{background:rgba(255,179,92,.14)}
 .mini--dark h3{color:#fdfaf2}
 .mini--dark p{color:#bcd4cf}
+
+/* ---------- VIDEO DEL DOCTOR ---------- */
+/* Lite-embed: antes del clic solo hay poster local y un <button>; el
+   iframe de youtube-nocookie se crea al hacer clic. La caja fija 9:16
+   reserva el alto desde el primer render (CLS 0). */
+.video{background:var(--cream);text-align:center}
+.video h2{margin:0 auto;max-width:24ch}
+.yt{
+  position:relative;margin:2rem auto 0;width:100%;max-width:380px;aspect-ratio:9/16;
+  border-radius:20px;overflow:hidden;background:#08252a;box-shadow:var(--shadow);
+}
+.yt-btn{
+  position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;margin:0;
+  background:none;cursor:pointer;display:block;-webkit-tap-highlight-color:transparent;
+}
+.yt-btn picture,.yt-btn img{display:block;width:100%;height:100%}
+.yt-btn img{object-fit:cover}
+.yt-play{
+  position:absolute;left:50%;top:50%;width:84px;height:84px;margin:-42px 0 0 -42px;
+  border-radius:50%;background:var(--amber);display:grid;place-items:center;
+  box-shadow:0 14px 34px -10px rgba(0,0,0,.55),0 0 0 8px rgba(255,179,92,.28);
+  transition:transform .2s ease,background-color .2s ease;
+}
+.yt-play svg{width:34px;height:34px;margin-left:5px;fill:#26140a}
+.yt-btn:hover .yt-play,.yt-btn:focus-visible .yt-play{transform:scale(1.06);background:var(--amber-glow)}
+.yt-btn:active .yt-play{transform:scale(.96)}
+.yt-btn:focus-visible{outline:3px solid var(--amber);outline-offset:-3px;border-radius:20px}
+.yt-dur{
+  position:absolute;top:14px;right:14px;padding:5px 11px;border-radius:999px;
+  background:rgba(8,37,42,.82);color:#fdfaf2;font-size:.78rem;font-weight:800;letter-spacing:.04em;
+}
+.yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-nota{margin:1.4rem auto 0;max-width:40ch;font-size:1.02rem;color:var(--ink-soft);line-height:1.55}
+.video-nota a{color:var(--teal)}
 
 /* ---------- 2 · PROGRAMA ACTIVAME ---------- */
 .prog{background:var(--cream)}
@@ -418,6 +452,7 @@ footer .aviso{
   .cmp.js-cascade .cmp-dif .no{transition:none;scale:1}
   .chip{transition:none}
   .dosis-num{transition:none}
+  .yt-play{transition:none}
   .sticky-wa{transition:none}
   .cta{transition:none}
   .mb-fill{transition:none}
@@ -526,6 +561,33 @@ footer .aviso{
         Ced. Prof. 5679320
       </figcaption>
     </figure>
+  </div>
+</section>
+
+<!-- ============ VIDEO DEL DOCTOR ============ -->
+<section class="video" id="video">
+  <div class="wrap">
+    <span class="eyebrow reveal" style="justify-content:center">En palabras del doctor</span>
+    <h2 class="reveal">Tres minutos para entender por qué tu cuerpo dejó de avisarte que ya comiste.</h2>
+
+    <div class="yt reveal" style="--d:.06s" id="ytDoctor" data-yt="uIAnQtVRxUo">
+      <button type="button" class="yt-btn" aria-label="Reproducir video del Dr. Bernal">
+        <picture>
+          <!-- El src se asigna por JS al acercarse (ver "Video del doctor"):
+               el lazy nativo de Chrome lo pedía al cargar y retrasaba el LCP. -->
+          <source data-srcset="/programas/video-poster.webp" type="image/webp">
+          <img data-src="/programas/video-poster.jpg" width="720" height="1280" alt=""
+               loading="lazy" decoding="async">
+        </picture>
+        <span class="yt-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z"/></svg></span>
+        <span class="yt-dur" aria-hidden="true">3 min</span>
+      </button>
+    </div>
+    <noscript>
+      <p class="video-nota"><a href="https://www.youtube.com/watch?v=uIAnQtVRxUo" rel="noopener">Ver el video en YouTube</a></p>
+    </noscript>
+
+    <p class="video-nota reveal">Si esto te hace sentido, cualquiera de los dos programas parte de aquí.</p>
   </div>
 </section>
 
@@ -931,6 +993,41 @@ function trackCta(location){
     for(var k = 0; k < elementos.length; k++) io.observe(elementos[k]);
   } else {
     for(var m = 0; m < elementos.length; m++) elementos[m].classList.add('visible');
+  }
+
+  /* --- Video del doctor: el iframe se crea solo al hacer clic ---
+     Antes del clic no hay ninguna petición a YouTube. */
+  var yt = document.getElementById('ytDoctor');
+  if(yt){
+    var ytBtn = yt.querySelector('.yt-btn');
+    /* Poster: se pide cuando el reproductor está a 400 px del viewport. */
+    var cargarPoster = function(){
+      var fuentes = yt.querySelectorAll('[data-srcset],[data-src]');
+      for(var f = 0; f < fuentes.length; f++){
+        var el = fuentes[f];
+        if(el.hasAttribute('data-srcset')){ el.srcset = el.getAttribute('data-srcset'); el.removeAttribute('data-srcset'); }
+        if(el.hasAttribute('data-src')){ el.src = el.getAttribute('data-src'); el.removeAttribute('data-src'); }
+      }
+    };
+    if('IntersectionObserver' in window){
+      var ioPoster = new IntersectionObserver(function(entradas){
+        if(entradas[0].isIntersecting){ cargarPoster(); ioPoster.disconnect(); }
+      }, { rootMargin: '400px 0px' });
+      ioPoster.observe(yt);
+    } else {
+      cargarPoster();
+    }
+    ytBtn.addEventListener('click', function(){
+      var marco = document.createElement('iframe');
+      marco.src = 'https://www.youtube-nocookie.com/embed/' + yt.getAttribute('data-yt') +
+                  '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      marco.title = 'Video del Dr. Bernal';
+      marco.setAttribute('allow', 'autoplay; encrypted-media; picture-in-picture');
+      marco.setAttribute('allowfullscreen', '');
+      marco.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+      yt.replaceChild(marco, ytBtn);
+      marco.focus();
+    });
   }
 
   /* --- Hero: iOS solo aplica :active si hay un listener de touch --- */
