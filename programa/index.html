@@ -25,7 +25,11 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!-- Fuentes sin bloquear el primer render. display=swap + fallback de
+     sistema mientras llegan. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap"></noscript>
 
 <!-- ===================================================================
      META PIXEL · HOOK LISTO, DESACTIVADO
@@ -761,7 +765,7 @@ body.has-sticky{padding-bottom:0}
         <div class="price-big">$15,000<small>MXN de pago inicial</small></div>
         <p class="price-split">más <b>7 pagos de $1,500 MXN</b></p>
         <div class="price-arg">
-          Son menos de <b>$2,500 pesos por semana</b>, con el medicamento y las consultas
+          Son alrededor de <b>$2,500 pesos por semana</b>, con el medicamento y las consultas
           ya incluidos. Cuando lo comparas con comprar el medicamento por tu cuenta y pagar
           consultas sueltas, la cuenta se explica sola.
         </div>
