@@ -29,6 +29,7 @@
      sistema mientras llegan. -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><style>.dosis-ui{display:none}</style></noscript>
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,500&amp;family=Mulish:wght@400;600;700;800&amp;display=swap"></noscript>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a3d45'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237ba088'/%3E%3C/svg%3E">
 
@@ -124,6 +125,11 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:22ch}
 /* ---- reveal ---- */
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
 .reveal.visible{opacity:1;transform:none}
+/* Presión de los CTA: usa la propiedad individual `scale` para no pelear
+   con el `transform` del hover ni con el de .reveal. */
+.cta:active{scale:.98}
+.cta{transition:transform .25s ease,box-shadow .25s ease,scale .12s ease}
+.cta.reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1),scale .12s ease;transition-delay:var(--d,0s),var(--d,0s),0s}
 
 /* ---------- TOPBAR ---------- */
 .topbar{position:absolute;top:0;left:0;right:0;z-index:20;padding:18px 0}
@@ -145,6 +151,17 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:22ch}
   display:flex;flex-direction:column;
   background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.18);
   border-radius:18px;padding:20px 20px 16px;
+  /* Entrada: solo opacity + transform, no mueve layout (CLS 0). El fill
+     "backwards" suelta el transform al terminar para que el hover use
+     `translate` sin conflicto. */
+  animation:optIn .6s cubic-bezier(.2,.7,.2,1) backwards;
+  transition:translate .25s ease,box-shadow .25s ease,border-color .25s ease;
+}
+.opt+.opt{animation-delay:.15s}
+@keyframes optIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.opt:hover,.opt:focus-within,.opt:active{
+  translate:0 -3px;border-color:var(--amber-glow);
+  box-shadow:0 16px 34px -18px rgba(0,0,0,.55);
 }
 .opt h2{font-size:1.25rem;color:#fdfaf2;max-width:none;line-height:1.2}
 .opt p{margin-top:.5rem;font-size:.93rem;color:#bcd4cf;line-height:1.5}
@@ -273,6 +290,27 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:22ch}
 .dosis tbody th{font-weight:700;color:#fdfaf2;font-size:1rem}
 .dosis td{text-align:right;font-family:'Newsreader',serif;font-size:1.35rem;color:var(--amber-glow);white-space:nowrap}
 .dosis thead th:last-child{text-align:right}
+/* Selector de dosis: radiogroup con roving tabindex. */
+.dosis-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.chip{
+  min-height:44px;padding:8px 6px;border-radius:999px;cursor:pointer;
+  font:700 .95rem/1.2 'Mulish',sans-serif;color:#d7e4e0;white-space:nowrap;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.22);
+  transition:background-color .2s ease,color .2s ease,border-color .2s ease,scale .12s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.chip:hover{border-color:var(--amber-glow)}
+.chip:active{scale:.98}
+.chip[aria-checked="true"]{background:var(--amber-glow);border-color:var(--amber-glow);color:#26140a}
+.chip:focus-visible{outline:3px solid var(--amber-glow);outline-offset:3px}
+.dosis-precio{margin-top:1.3rem}
+.dosis-num{
+  display:block;font-family:'Newsreader',serif;font-weight:500;
+  font-size:clamp(2.6rem,11vw,3.4rem);line-height:1;letter-spacing:-.02em;color:#fdfaf2;
+  transition:opacity .1s ease,transform .1s ease;
+}
+.dosis-num.cambia{opacity:0;transform:translateY(4px)}
+.dosis-unidad{display:block;margin-top:.45rem;font-size:.78rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-glow)}
 .dosis-nota{margin-top:1rem;font-size:.9rem;color:#9fc0b9;line-height:1.6;max-width:62ch}
 .remate{
   margin-top:2.2rem;padding:22px 0 0 20px;border-left:3px solid var(--amber-glow);
@@ -296,6 +334,14 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:22ch}
 .cmp td{text-align:center;color:var(--ink-soft)}
 .cmp td.txt{font-size:.82rem;overflow-wrap:break-word}
 .cmp tbody tr:nth-child(even){background:rgba(123,160,136,.07)}
+/* Cascada de filas: solo se oculta si el JS la activó (.js-cascade), así
+   sin JS la tabla se ve completa. Opacity + transform: no toca el layout. */
+.cmp.js-cascade tbody tr{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.2,1);transition-delay:var(--rd,0s)}
+.cmp.js-cascade tbody tr.on{opacity:1;transform:none}
+/* Filas que marcan la diferencia: ✕ con scale al aparecer, ✓ en ámbar. */
+.cmp-dif .si{background:rgba(217,122,52,.2);color:#9a4f14}
+.cmp.js-cascade .cmp-dif .no{scale:.8;transition:scale .4s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--rd,0s) + .15s)}
+.cmp.js-cascade .cmp-dif.on .no{scale:1}
 .si,.no{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-size:.8rem;font-weight:800}
 .si{background:rgba(123,160,136,.22);color:#2f6b4f}
 .no{background:rgba(217,122,52,.13);color:#a35c1c}
@@ -366,6 +412,12 @@ footer .aviso{
 @media(min-width:768px){ .sticky-wa{display:none} }
 @media(prefers-reduced-motion:reduce){
   .reveal{transition:none;opacity:1;transform:none}
+  .cta.reveal{transition:none}
+  .opt{animation:none;transition:none}
+  .cmp.js-cascade tbody tr{transition:none;opacity:1;transform:none}
+  .cmp.js-cascade .cmp-dif .no{transition:none;scale:1}
+  .chip{transition:none}
+  .dosis-num{transition:none}
   .sticky-wa{transition:none}
   .cta{transition:none}
   .mb-fill{transition:none}
@@ -593,6 +645,19 @@ footer .aviso{
 
     <div class="dosis-box reveal" style="--d:.06s">
     <span class="dosis-cap" id="dosisCap">Precio por visita</span>
+    <div class="dosis-ui">
+      <div class="dosis-chips" role="radiogroup" aria-labelledby="dosisCap" id="dosisChips">
+        <button type="button" class="chip" role="radio" aria-checked="true"  tabindex="0"  data-precio="$1,200">2.5 mg</button>
+        <button type="button" class="chip" role="radio" aria-checked="false" tabindex="-1" data-precio="$1,600">5 mg</button>
+        <button type="button" class="chip" role="radio" aria-checked="false" tabindex="-1" data-precio="$1,900">7.5 mg</button>
+        <button type="button" class="chip" role="radio" aria-checked="false" tabindex="-1" data-precio="$2,300">10 mg</button>
+      </div>
+      <p class="dosis-precio" aria-live="polite">
+        <span class="dosis-num" id="dosisPrecio">$1,200</span>
+        <span class="dosis-unidad">por visita · MXN</span>
+      </p>
+    </div>
+    <noscript>
     <table class="dosis" aria-labelledby="dosisCap">
       <thead>
         <tr><th scope="col">Dosis</th><th scope="col">MXN</th></tr>
@@ -604,6 +669,7 @@ footer .aviso{
         <tr><th scope="row">10 mg</th><td>$2,300</td></tr>
       </tbody>
     </table>
+    </noscript>
     </div>
     <p class="dosis-nota reveal">
       Sin contratos ni pagos adelantados. No manejamos dosis de 12.5 ni 15 mg: a esas dosis todo
@@ -623,7 +689,7 @@ footer .aviso{
     <span class="eyebrow reveal">Comparar</span>
     <h2 class="reveal">¿Cuál es para ti?</h2>
 
-    <div class="cmp-box reveal" style="--d:.06s">
+    <div class="cmp-box">
       <table class="cmp">
         <colgroup><col class="c1"><col><col></colgroup>
         <thead>
@@ -641,10 +707,10 @@ footer .aviso{
           <tr><th scope="row">Presión arterial</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
           <tr><th scope="row">Orientación nutricional</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
           <tr><th scope="row">App Ana</th><td class="txt"><span class="si" aria-hidden="true">✓</span><span class="sr">Sí,</span><br>60 días</td><td class="txt"><span class="si" aria-hidden="true">✓</span><span class="sr">Sí,</span><br>60 días</td></tr>
-          <tr><th scope="row">Educación semanal estructurada</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
-          <tr><th scope="row">Suplementación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
-          <tr><th scope="row">Libro y plan de alimentación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
-          <tr><th scope="row">Semanas de transición hacia la autonomía</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr class="cmp-dif"><th scope="row">Educación semanal estructurada</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr class="cmp-dif"><th scope="row">Suplementación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr class="cmp-dif"><th scope="row">Libro y plan de alimentación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr class="cmp-dif"><th scope="row">Semanas de transición hacia la autonomía</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
           <tr><th scope="row">Pago</th><td class="txt">Programa completo</td><td class="txt">Por visita</td></tr>
         </tbody>
       </table>
@@ -865,6 +931,79 @@ function trackCta(location){
     for(var k = 0; k < elementos.length; k++) io.observe(elementos[k]);
   } else {
     for(var m = 0; m < elementos.length; m++) elementos[m].classList.add('visible');
+  }
+
+  /* --- Hero: iOS solo aplica :active si hay un listener de touch --- */
+  document.addEventListener('touchstart', function(){}, { passive: true });
+
+  /* --- Comparativa: filas en cascada (60 ms entre filas) ---
+     Cada fila se observa por separado; las que entran juntas en el mismo
+     callback se escalonan en orden de documento. */
+  var reducirMovimiento = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  var tablaCmp = document.querySelector('.cmp');
+  if(tablaCmp && !reducirMovimiento && 'IntersectionObserver' in window){
+    var filas = tablaCmp.querySelectorAll('tbody tr');
+    tablaCmp.classList.add('js-cascade');
+    var ioFilas = new IntersectionObserver(function(entradas){
+      var nuevas = [];
+      for(var a = 0; a < entradas.length; a++){
+        if(entradas[a].isIntersecting) nuevas.push(entradas[a].target);
+      }
+      nuevas.sort(function(x, y){ return x.rowIndex - y.rowIndex; });
+      for(var b = 0; b < nuevas.length; b++){
+        nuevas[b].style.setProperty('--rd', (b * 0.06).toFixed(2) + 's');
+        nuevas[b].classList.add('on');
+        ioFilas.unobserve(nuevas[b]);
+      }
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.2 });
+    for(var c = 0; c < filas.length; c++) ioFilas.observe(filas[c]);
+  }
+
+  /* --- Precio por visita: radiogroup de dosis ---
+     Patrón ARIA de radio: una sola parada de Tab, flechas mueven y
+     seleccionan, Home/End a los extremos. El precio cambia con un fundido
+     de 200 ms (100 de salida + 100 de entrada); sin movimiento si el
+     usuario lo pidió. */
+  var grupo = document.getElementById('dosisChips');
+  if(grupo){
+    var chips = grupo.querySelectorAll('[role="radio"]');
+    var precio = document.getElementById('dosisPrecio');
+    var temporizador = null;
+    var elegir = function(idx, enfocar){
+      for(var d = 0; d < chips.length; d++){
+        var activo = d === idx;
+        chips[d].setAttribute('aria-checked', activo ? 'true' : 'false');
+        chips[d].tabIndex = activo ? 0 : -1;
+      }
+      if(enfocar) chips[idx].focus();
+      var nuevo = chips[idx].getAttribute('data-precio');
+      if(precio.textContent === nuevo) return;
+      if(reducirMovimiento){ precio.textContent = nuevo; return; }
+      clearTimeout(temporizador);
+      precio.classList.add('cambia');
+      temporizador = setTimeout(function(){
+        precio.textContent = nuevo;
+        precio.classList.remove('cambia');
+      }, 100);
+    };
+    for(var e = 0; e < chips.length; e++){
+      (function(idx){
+        chips[idx].addEventListener('click', function(){ elegir(idx, false); });
+      })(e);
+    }
+    grupo.addEventListener('keydown', function(ev){
+      var actual = Array.prototype.indexOf.call(chips, document.activeElement);
+      if(actual < 0) return;
+      var n = chips.length, destino = null;
+      if(ev.key === 'ArrowRight' || ev.key === 'ArrowDown') destino = (actual + 1) % n;
+      else if(ev.key === 'ArrowLeft' || ev.key === 'ArrowUp') destino = (actual - 1 + n) % n;
+      else if(ev.key === 'Home') destino = 0;
+      else if(ev.key === 'End') destino = n - 1;
+      else if(ev.key === ' ' || ev.key === 'Enter') destino = actual;
+      if(destino === null) return;
+      ev.preventDefault();
+      elegir(destino, true);
+    });
   }
 
   /* --- "Lo que medimos cada semana" (misma curva que /programa) ---
