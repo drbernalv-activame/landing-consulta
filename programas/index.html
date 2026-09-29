@@ -249,6 +249,22 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:22ch}
 
 /* ---------- 2 · PROGRAMA ACTIVAME ---------- */
 .prog{background:var(--cream)}
+/* Cabecera en par para #programa-activame y #activame-360: nombre del
+   programa (H2), línea corta en estilo eyebrow y la frase como H3. */
+.pg-title{font-size:clamp(2rem,6.4vw,3rem);max-width:none;line-height:1.05}
+.pg-tag{
+  margin-top:.7rem;font-size:.9rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--amber);line-height:1.4;
+}
+.pg-lema{
+  margin-top:1.4rem;font-family:'Newsreader',Georgia,serif;font-weight:400;
+  font-size:clamp(1.4rem,4.4vw,1.6rem);line-height:1.3;letter-spacing:-.005em;
+  color:var(--ink);max-width:32ch;
+}
+.prog .pg-title{color:var(--teal-deep)}
+.a360 .pg-title{color:var(--amber-glow)}
+.a360 .pg-tag{color:var(--amber-glow)}
+.a360 .pg-lema{color:var(--cream)}
 /* medicion semanal: slider ilustrativo 0-10 (igual que en /programa).
    Las dos barras son proporcion visual, no cifras: por eso las pistas van
    aria-hidden y el rango expone su estado como "Semana N" via aria-valuetext. */
@@ -594,8 +610,9 @@ footer .aviso{
 <!-- ============ 2 · PROGRAMA ACTIVAME ============ -->
 <section class="prog" id="programa-activame">
   <div class="wrap">
-    <span class="eyebrow reveal">Programa ActivaMe · 10 semanas</span>
-    <h2 class="reveal">Diez semanas para dejar de pelear contra tu cuerpo y empezar a trabajar con él.</h2>
+    <h2 class="pg-title reveal">Programa ActivaMe</h2>
+    <p class="pg-tag reveal">10 semanas · todo incluido</p>
+    <h3 class="pg-lema reveal" style="--d:.04s">Diez semanas para dejar de pelear contra tu cuerpo y empezar a trabajar con él.</h3>
     <p class="sec-intro reveal" style="--d:.06s">
       No se trata de comer menos ni de aguantar hambre: vas a entender cómo funciona tu cuerpo
       y a transformar tus hábitos desde la raíz, con un equipo médico que mide tu avance cada semana.
@@ -672,8 +689,9 @@ footer .aviso{
 <!-- ============ 3 · ACTIVAME 360 ============ -->
 <section class="a360" id="activame-360">
   <div class="wrap">
-    <span class="eyebrow eyebrow--light reveal">ActivaMe 360 · pago por visita</span>
-    <h2 class="reveal">Si ya usas tu medicamento o estás pensando en iniciarlo, no tienes por qué hacerlo solo.</h2>
+    <h2 class="pg-title reveal">ActivaMe 360</h2>
+    <p class="pg-tag reveal">Pago por visita · sin contratos</p>
+    <h3 class="pg-lema reveal" style="--d:.04s">Si ya usas tu medicamento o estás pensando en iniciarlo, no tienes por qué hacerlo solo.</h3>
     <p class="sec-intro reveal" style="--d:.06s">
       Cada vez más personas se aplican su tratamiento sin supervisión. Bajan de peso, pero no saben
       si están perdiendo grasa o músculo, si su dosis es la correcta o qué hacer cuando algo no se
