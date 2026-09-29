@@ -481,6 +481,16 @@ footer .aviso{
 /* ---------- ≥ 560px: tarjetas lado a lado ---------- */
 @media(min-width:560px){
   .opts{grid-template-columns:1fr 1fr}
+}
+/* Lado a lado, las dos tarjetas comparten filas (título, descripción,
+   precio, enlace) con subgrid: cada bloque queda a la misma altura que su
+   par aunque uno ocupe más renglones. Sin subgrid, siguen como flex. */
+@supports (grid-template-rows:subgrid){
+  @media(min-width:560px){
+    .opts{grid-auto-rows:auto;row-gap:0}
+    .opt{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0}
+    .opt a{align-self:end;justify-self:start}
+  }
   .cards{grid-template-columns:1fr 1fr}
   .cta-pair{grid-template-columns:auto auto}
 }
@@ -512,6 +522,10 @@ footer .aviso{
   section{padding:104px 0}
   .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:52px;align-items:start}
   .portrait{margin-top:.4rem;max-width:none;aspect-ratio:3/4}
+  /* En desktop las tarjetas miden ~300 px y "Programa ActivaMe · 10 semanas"
+     ocupa dos renglones: se reservan dos en ambos títulos (line-height 1.2)
+     para que los precios queden a la misma altura. */
+  .opt h2{min-height:2.4em}
   .cards--4{grid-template-columns:repeat(4,1fr)}
 }
 </style>
