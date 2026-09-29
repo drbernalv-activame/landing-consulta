@@ -481,6 +481,8 @@ footer .aviso{
 /* ---------- ≥ 560px: tarjetas lado a lado ---------- */
 @media(min-width:560px){
   .opts{grid-template-columns:1fr 1fr}
+  .cards{grid-template-columns:1fr 1fr}
+  .cta-pair{grid-template-columns:auto auto}
 }
 /* Lado a lado, las dos tarjetas comparten filas (título, descripción,
    precio, enlace) con subgrid: cada bloque queda a la misma altura que su
@@ -491,8 +493,6 @@ footer .aviso{
     .opt{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0}
     .opt a{align-self:end;justify-self:start}
   }
-  .cards{grid-template-columns:1fr 1fr}
-  .cta-pair{grid-template-columns:auto auto}
 }
 
 /* ---------- ≥ 768px ---------- */
@@ -816,7 +816,7 @@ footer .aviso{
     </div>
 
     <p class="cmp-cierre reveal">
-      El 360 te cuida mientras usas el medicamento. El Programa te prepara para cuando ya no lo uses.
+      ActivaMe 360 te cuida mientras usas el medicamento. El Programa ActivaMe te prepara para cuando ya no lo uses.
       <em>¿Cuál de los dos necesitas hoy?</em>
     </p>
     <div class="cta-pair reveal">
