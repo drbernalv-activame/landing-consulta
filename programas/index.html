@@ -391,8 +391,8 @@ h2{font-size:clamp(1.75rem,5.6vw,2.7rem);color:var(--teal-deep);max-width:22ch}
    sin JS la tabla se ve completa. Opacity + transform: no toca el layout. */
 .cmp.js-cascade tbody tr{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s cubic-bezier(.2,.7,.2,1);transition-delay:var(--rd,0s)}
 .cmp.js-cascade tbody tr.on{opacity:1;transform:none}
-/* Filas que marcan la diferencia: ✕ con scale al aparecer, ✓ en ámbar. */
-.cmp-dif .si{background:rgba(217,122,52,.2);color:#9a4f14}
+/* Filas que marcan la diferencia: la ✕ hace scale al aparecer. Las ✓
+   conservan el verde sage de todas las filas. */
 .cmp.js-cascade .cmp-dif .no{scale:.8;transition:scale .4s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--rd,0s) + .15s)}
 .cmp.js-cascade .cmp-dif.on .no{scale:1}
 .si,.no{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-size:.8rem;font-weight:800}
