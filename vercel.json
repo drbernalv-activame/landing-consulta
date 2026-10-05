@@ -1,6 +1,8 @@
 {
   "redirects": [
     { "source": "/consulta", "destination": "/", "statusCode": 301 },
-    { "source": "/consulta/", "destination": "/", "statusCode": 301 }
+    { "source": "/consulta/", "destination": "/", "statusCode": 301 },
+    { "source": "/programas", "destination": "/programa", "statusCode": 301 },
+    { "source": "/programas/", "destination": "/programa", "statusCode": 301 }
   ]
 }
