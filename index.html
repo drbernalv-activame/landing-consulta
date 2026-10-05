@@ -6,9 +6,11 @@
 <title>ActivaMe · Reactiva tu GLP-1 nativo</title>
 <meta name="description" content="Tu GLP-1 no está roto, está apagado. Reactivamos tu propia biología de la saciedad con activación dual, suplementación funcional y acompañamiento 24/7.">
 
+<link rel="canonical" href="https://consulta.activame.mx/">
+
 <!-- Open Graph / WhatsApp preview -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://consulta.activame.mx">
+<meta property="og:url" content="https://consulta.activame.mx/">
 <meta property="og:title" content="ActivaMe · No es falta de voluntad, es biología alterada">
 <meta property="og:description" content="Descubre por qué tu cuerpo dejó de producir GLP-1 y cómo reactivarlo. Haz el quiz de 2 minutos y conoce tu patrón metabólico.">
 <meta property="og:image" content="https://consulta.activame.mx/og-image.png.png">
@@ -22,7 +24,12 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Mulish:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Fuentes sin bloquear el primer render (igual que /programa y /programas).
+     display=swap + fallback de sistema mientras llegan. -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&amp;family=Mulish:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&amp;family=Mulish:wght@400;500;600;700;800&amp;display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&amp;family=Mulish:wght@400;500;600;700;800&amp;display=swap"></noscript>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a3d45'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237ba088'/%3E%3C/svg%3E">
 <style>
 :root{
   --ink:#13302d;
@@ -236,20 +243,77 @@ section{position:relative;padding:clamp(70px,11vh,140px) 0}
 .oferta-head .eyebrow::before{background:var(--amber-glow)}
 .oferta-card h2{font-size:clamp(1.7rem,4vw,2.6rem);color:#fdfaf2}
 .oferta-card .tagline{margin-top:1.1rem;color:#cfe1dc;font-size:1.08rem}
-.includes{position:relative;z-index:2;margin-top:2.6rem;display:flex;flex-direction:column;gap:4px}
-.inc-item{display:grid;grid-template-columns:44px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.1)}
-.inc-item:last-child{border-bottom:none}
-.inc-item .ic{width:44px;height:44px;border-radius:13px;background:rgba(255,179,92,.14);display:grid;place-items:center;font-size:1.25rem}
-.inc-item h4{font-family:'Mulish',sans-serif;font-size:1.12rem;font-weight:800;color:#fff;margin-bottom:5px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.inc-item p{color:#bcd4cf;font-size:.98rem;line-height:1.5}
-.inc-item .bonus-tag{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#26140a;background:var(--amber-glow);border-radius:999px;padding:3px 10px}
-.sublist{margin-top:8px;display:flex;flex-wrap:wrap;gap:8px}
-.sublist span{font-size:.82rem;color:#d6e6e1;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:5px 12px}
-.oferta-price{position:relative;z-index:2;margin-top:2.8rem;padding-top:2.4rem;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;align-items:flex-end;gap:8px 22px}
-.oferta-price .ref{font-size:1.05rem;color:#9fc0b9;text-decoration:line-through;text-decoration-color:var(--amber);text-decoration-thickness:2px}
-.oferta-price .now{font-family:'Newsreader',serif;font-size:clamp(2.4rem,6vw,3.4rem);font-weight:600;color:var(--amber-glow);line-height:1}
-.oferta-price .now small{font-family:'Mulish',sans-serif;font-size:1rem;font-weight:700;color:#cfe1dc;display:block;margin-top:6px}
-.oferta-price .plan{font-size:.95rem;color:#cfe1dc;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 16px;line-height:1.4}
+/* Dos formas de hacerlo: tarjetas con la misma estructura que las del hero
+   de /programas. Lado a lado comparten filas con subgrid (título,
+   descripción, precio, lista, extra) para que cada bloque quede alineado
+   con su par. */
+.opts{position:relative;z-index:2;margin-top:2.4rem;display:grid;gap:16px}
+.opt{display:flex;flex-direction:column;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:22px 22px 20px}
+.opt h3{font-size:1.3rem;color:#fdfaf2;line-height:1.2}
+.opt .opt-desc{margin-top:.5rem;font-size:.95rem;color:#bcd4cf;line-height:1.5}
+.opt .opt-price{margin-top:1rem;font-family:'Newsreader',serif;font-size:1.25rem;color:var(--amber-glow);line-height:1.25}
+.opt .opt-price-sub{display:block;margin-top:.2rem;font-size:.85em;line-height:1.3}
+.opt .opt-ref{display:block;margin-bottom:.35rem;font-family:'Mulish',sans-serif;font-size:.85rem;color:#9fc0b9;text-decoration:line-through;text-decoration-color:var(--amber);text-decoration-thickness:2px}
+.opt-list{list-style:none;margin-top:1.1rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.12);display:grid;gap:.55rem;align-content:start}
+.opt-list li{font-size:.92rem;color:#d6e6e1;line-height:1.45;padding-left:18px;position:relative}
+.opt-list li::before{content:"";position:absolute;left:2px;top:.55em;width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.opt-dosis{margin-top:1.2rem}
+.opt-dosis table{width:100%;border-collapse:collapse}
+.opt-dosis caption{text-align:left;padding-bottom:.5rem;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--sage-soft)}
+.opt-dosis th,.opt-dosis td{padding:8px 0;border-top:1px solid rgba(255,255,255,.1);text-align:left;font-size:.92rem;font-weight:700;color:#fdfaf2}
+.opt-dosis td{text-align:right;font-family:'Newsreader',serif;font-weight:500;font-size:1.12rem;color:var(--amber-glow)}
+.opt-dosis .nota{margin-top:.6rem;font-size:.84rem;color:#9fc0b9;line-height:1.45}
+@media(min-width:768px){ .opts{grid-template-columns:1fr 1fr;gap:18px} }
+@supports (grid-template-rows:subgrid){
+  @media(min-width:768px){
+    .opts{row-gap:0}
+    .opt{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:0}
+  }
+}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+/* Comparativa: misma tabla que /programas, sin la cascada ni el pop. */
+.cmp-box{margin-top:2.4rem;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;border:1px solid var(--line);background:var(--paper)}
+.cmp{width:100%;border-collapse:collapse;table-layout:fixed;min-width:300px}
+.cmp col.c1{width:40%}
+.cmp th,.cmp td{padding:12px 8px;border-top:1px solid var(--line);vertical-align:middle;font-size:.88rem;line-height:1.4}
+.cmp thead th{border-top:0;background:var(--teal-deep);color:#fdfaf2;font-family:'Newsreader',serif;font-weight:500;font-size:.95rem;text-align:center;line-height:1.2}
+.cmp tbody th{text-align:left;padding-left:14px;font-weight:700;color:var(--teal-deep)}
+.cmp td{text-align:center;color:var(--ink-soft)}
+.cmp td.txt{font-size:.82rem;overflow-wrap:break-word}
+.cmp tbody tr:nth-child(even){background:rgba(123,160,136,.07)}
+.si,.no{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;font-size:.8rem;font-weight:800}
+.si{background:rgba(123,160,136,.22);color:#2f6b4f}
+.no{background:rgba(217,122,52,.13);color:#a35c1c}
+.cmp-cierre{
+  margin:2.4rem auto 0;text-align:center;max-width:32ch;
+  font-family:'Newsreader',serif;font-weight:500;color:var(--teal-deep);
+  font-size:clamp(1.4rem,4.4vw,2rem);line-height:1.25;
+}
+@media(min-width:768px){
+  .cmp th,.cmp td{padding:15px 20px;font-size:.95rem}
+  .cmp td.txt{font-size:.9rem}
+  .cmp thead th{font-size:1.15rem}
+}
+
+/* ---------- FAQ (details/summary nativo, igual que /programas) ---------- */
+.faq{background:var(--cream)}
+.faq h2{font-size:clamp(1.9rem,4.4vw,2.7rem);color:var(--teal-deep)}
+.faq-list{margin-top:2rem;display:grid;gap:10px;max-width:760px}
+.faq details{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faq details[open]{border-color:rgba(123,160,136,.5)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:18px 48px 18px 20px;position:relative;
+  font-weight:700;font-size:1rem;color:var(--teal-deep);line-height:1.4;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";position:absolute;right:18px;top:50%;transform:translateY(-50%);
+  width:26px;height:26px;border-radius:50%;background:rgba(123,160,136,.18);
+  color:var(--teal-deep);display:grid;place-items:center;font-size:1.1rem;font-weight:400;
+}
+.faq details[open] summary::after{content:"–"}
+.faq summary:focus-visible{outline:3px solid var(--amber);outline-offset:-3px}
+.faq-a{padding:0 20px 20px;font-size:.95rem;color:var(--ink-soft);line-height:1.6}
 
 /* ---------- ACCION (module 6) ---------- */
 .accion{background:radial-gradient(120% 130% at 50% 0%,#11424a,#082a2f);color:var(--cream);text-align:center}
@@ -356,7 +420,6 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
   .bridge{flex-direction:row;padding:6px 0}
   .bridge .arrow{transform:rotate(90deg)}
   .pillars{grid-template-columns:1fr 1fr}
-  .oferta-price{flex-direction:column;align-items:flex-start}
 }
 @media(max-width:520px){
   .causes,.pillars{grid-template-columns:1fr}
@@ -636,8 +699,8 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
       </div>
       <div class="pillar reveal" style="--d:.22s">
         <span class="num">03</span>
-        <h3>Programa de Seguimiento</h3>
-        <p>Valoración metabólica al inicio y al finalizar tu programa, con laboratorios que demuestran el impacto real sobre tu metabolismo. Te acompañamos en cada fase del camino.</p>
+        <h3>Medición en cada cita</h3>
+        <p>Composición corporal con InBody 970s y fuerza con dinamometría en cada consulta semanal del Programa y en cada aplicación de ActivaMe 360: sabes si estás perdiendo grasa y cuidando tu músculo.</p>
         <span class="chip">Datos reales</span>
       </div>
       <div class="pillar reveal" style="--d:.28s">
@@ -695,66 +758,112 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
   </div>
 </section>
 
-<!-- MÓDULO 5.5 · OFERTA -->
+<!-- MÓDULO 5.5 · DOS FORMAS DE HACERLO
+     Conserva id="programa": el resultado del quiz (fuera de Chihuahua)
+     enlaza a #programa y su lógica no se toca. -->
 <section class="oferta" id="programa">
   <div class="wrap">
     <div class="oferta-card reveal">
       <div class="oferta-head">
-        <span class="eyebrow">El programa</span>
-        <h2>Programa ActivaMe · 10 semanas</h2>
-        <p class="tagline">Esto no es un tratamiento de inyecciones. Es un programa de reingeniería metabólica para reactivar tu propio GLP-1 — con medición real al inicio y al final que demuestra lo que tu cuerpo logró.</p>
+        <span class="eyebrow">Después de tu consulta</span>
+        <h2>Dos formas de hacerlo con nosotros</h2>
+        <p class="tagline">En la valoración el doctor te dice con honestidad cuál de las dos te conviene, aunque la respuesta sea ninguna.</p>
       </div>
 
-      <div class="includes">
-        <div class="inc-item">
-          <div class="ic">🔬</div>
-          <div>
-            <h4>Valoración metabólica inicial y final</h4>
-            <p>Tu punto de partida y tu prueba de resultado: Panel ActivaMe (glucosa, insulina, HOMA-IR, perfil de lípidos, TG/HDL) + composición corporal con InBody 970. No medimos solo la báscula: medimos tu fisiología, antes y después.</p>
+      <div class="opts">
+        <article class="opt">
+          <h3>Programa ActivaMe · 10&nbsp;semanas</h3>
+          <p class="opt-desc">Todo incluido para activar tu GLP-1 natural y transformar tus hábitos.</p>
+          <p class="opt-price"><span class="opt-ref">Valor de referencia $29,900</span>$24,900 en un pago
+            <span class="opt-price-sub">o $15,000 + 7 pagos semanales de&nbsp;$1,500</span></p>
+          <ul class="opt-list">
+            <li>10 consultas semanales con medición InBody 970s y dinamometría</li>
+            <li>Medicamento en dosis bajas, supervisado</li>
+            <li>Suplementación: Fibra Inteligente con Akkermansia, Proteína Funcional Diurna y Nocturna</li>
+            <li>Plan de alimentación y libro «Cómo activar tu GLP-1 nativo»</li>
+            <li>Ana te acompaña 60 días</li>
+            <li>Semanas de transición hacia la autonomía</li>
+          </ul>
+        </article>
+        <article class="opt">
+          <h3>ActivaMe 360 · pago por aplicación</h3>
+          <p class="opt-desc">Tu medicamento con supervisión médica completa: medimos, ajustamos y te acompañamos en cada aplicación.</p>
+          <p class="opt-price">desde $1,200 por aplicación
+            <span class="opt-price-sub">pagas solo la aplicación que recibes</span></p>
+          <ul class="opt-list">
+            <li>InBody 970s, dinamómetro y presión arterial en cada aplicación</li>
+            <li>Dosis indicada por el médico</li>
+            <li>Orientación nutricional</li>
+            <li>Ana te acompaña 60 días</li>
+          </ul>
+          <div class="opt-dosis">
+            <table>
+              <caption>Precio por aplicación · MXN</caption>
+              <tbody>
+                <tr><th scope="row">2.5 mg</th><td>$1,200</td></tr>
+                <tr><th scope="row">5 mg</th><td>$1,600</td></tr>
+                <tr><th scope="row">7.5 mg</th><td>$1,900</td></tr>
+                <tr><th scope="row">10 mg</th><td>$2,300</td></tr>
+              </tbody>
+            </table>
+            <p class="nota">No manejamos dosis de 12.5 ni 15 mg.</p>
           </div>
-        </div>
-        <div class="inc-item">
-          <div class="ic">💧</div>
-          <div>
-            <h4>10 aplicaciones de tirzepatida en dosis bajas</h4>
-            <p>El puente temporal, no el protagonista. Dosis bajas y supervisadas mientras tu íleon vuelve a encender la producción de GLP-1 nativo. No te dejamos dependiente de la inyección: la usamos para abrir la puerta.</p>
-          </div>
-        </div>
-        <div class="inc-item">
-          <div class="ic">📦</div>
-          <div>
-            <h4>Kit completo ActivaMe</h4>
-            <p>Las piezas que reeducan tu intestino y protegen tu músculo, tu órgano quema-grasa.</p>
-            <div class="sublist">
-              <span>Fibra Inteligente</span>
-              <span>Proteína Diurna</span>
-              <span>Proteína Nocturna</span>
-              <span>Probiótico Akkermansia</span>
-              <span>📖 Libro «Cómo activar mi GLP-1 Nativo»</span>
-            </div>
-          </div>
-        </div>
-        <div class="inc-item">
-          <div class="ic">🧭</div>
-          <div>
-            <h4>Acompañamiento multidisciplinario por las 4 fases</h4>
-            <p>Cimientos → Activación → Profundización → Autonomía. Seguimiento con el equipo a lo largo de las 10 semanas: ajustamos alimentación, secuencia de alimentos, movimiento postprandial y ritmo circadiano según cómo responde tu cuerpo.</p>
-          </div>
-        </div>
-        <div class="inc-item">
-          <div class="ic">💬</div>
-          <div>
-            <h4>Ana, tu acompañante IA 24/7 <span class="bonus-tag">Bonus</span></h4>
-            <p>Tu guía diaria sin costo adicional: plan de alimentación personalizado, plan de movimiento, microlecciones, diario metabólico y respuestas a tus dudas a cualquier hora. El acompañamiento que normalmente termina al salir del consultorio — aquí va contigo todos los días.</p>
-          </div>
-        </div>
+        </article>
       </div>
+    </div>
 
-      <div class="oferta-price">
-        <span class="ref">Valor de referencia $29,900</span>
-        <span class="now">$24,900<small>MXN · pago único</small></span>
-        <span class="plan">o <b>$15,000</b> + 7 pagos de <b>$1,500</b></span>
-      </div>
+    <div class="cmp-box reveal">
+      <table class="cmp">
+        <colgroup><col class="c1"><col><col></colgroup>
+        <thead>
+          <tr>
+            <th scope="col"><span class="sr">Concepto</span></th>
+            <th scope="col">Programa ActivaMe</th>
+            <th scope="col">ActivaMe 360</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Meta</th><td class="txt">Activar tu GLP-1 natural y transformar tus hábitos</td><td class="txt">Usar tu medicamento con seguridad y acompa&shy;ñamiento</td></tr>
+          <tr><th scope="row">Supervisión médica</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
+          <tr><th scope="row">Composición corporal con InBody 970s</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
+          <tr><th scope="row">Función muscular con dinamometría</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
+          <tr><th scope="row">Presión arterial</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
+          <tr><th scope="row">Orientación nutricional</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
+          <tr><th scope="row">App Ana</th><td class="txt"><span class="si" aria-hidden="true">✓</span><span class="sr">Sí,</span><br>60 días</td><td class="txt"><span class="si" aria-hidden="true">✓</span><span class="sr">Sí,</span><br>60 días</td></tr>
+          <tr><th scope="row">Educación semanal estructurada</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr><th scope="row">Suplementación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr><th scope="row">Libro y plan de alimentación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr><th scope="row">Semanas de transición hacia la autonomía</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
+          <tr><th scope="row">Pago</th><td class="txt">Programa completo</td><td class="txt">Por aplicación</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="cmp-cierre reveal">ActivaMe 360 te cuida mientras usas el medicamento. El Programa ActivaMe te prepara para cuando ya no lo uses.</p>
+  </div>
+</section>
+
+<!-- FAQ · index.html no tenía; textos tomados tal cual de /programas -->
+<section class="faq" id="preguntas">
+  <div class="wrap">
+    <div class="reveal"><span class="eyebrow">Preguntas frecuentes</span></div>
+    <h2 class="reveal" style="--d:.05s">Antes de apartar tu consulta</h2>
+    <div class="faq-list">
+      <details class="reveal" style="--d:.08s">
+        <summary>¿Puedo empezar en ActivaMe 360 y pasarme después al Programa?</summary>
+        <div class="faq-a">
+          <!-- PENDIENTE: confirmar si las aplicaciones pagadas de ActivaMe 360 se abonan al Programa. -->
+          <p>Sí, en cualquier momento; lo ves con el equipo en tu siguiente aplicación.</p>
+        </div>
+      </details>
+      <details class="reveal" style="--d:.1s">
+        <summary>¿Qué formas de pago aceptan?</summary>
+        <div class="faq-a">
+          <p>Efectivo y tarjeta de crédito o débito, directamente en la clínica. En ActivaMe 360
+          pagas cada aplicación al momento. Los estudios de laboratorio, si el médico los indica,
+          se cobran aparte.</p>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -763,14 +872,14 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
 <section class="accion" id="accion">
   <div class="wrap">
     <h2 class="reveal">No vendemos inyecciones. Diseñamos fisiología.</h2>
-    <p class="sub reveal" style="--d:.08s">Aparta tu consulta con el Dr. Bernal. Si prefieres entender tu caso antes, haz el quiz GLP-1 en 3 minutos.</p>
+    <p class="sub reveal" style="--d:.08s">Aparta tu consulta con el Dr. Bernal: es el primer paso tanto para el Programa ActivaMe como para ActivaMe 360. Si prefieres entender tu caso antes, haz el quiz GLP-1 en 3 minutos.</p>
     <div class="cta-group reveal" style="--d:.14s">
       <a class="cta" href="https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05"
          data-cta-location="footer" data-cta-target="consulta">Apartar mi consulta <span class="price">$1,000</span></a>
       <a class="cta-secondary" href="#quiz"
          data-cta-location="footer" data-cta-target="quiz">Hacer el quiz GLP-1</a>
     </div>
-    <p class="fine reveal" style="--d:.2s">Tu lugar se aparta al momento del pago. Es un servicio médico independiente, no un anticipo del programa. Si necesitas mover tu cita, puedes reagendar sin costo hasta 24 h antes.</p>
+    <p class="fine reveal" style="--d:.2s">Tu lugar se aparta al momento del pago. Es un servicio médico independiente, no un anticipo del Programa ActivaMe ni de ActivaMe 360. Si necesitas mover tu cita, puedes reagendar sin costo hasta 24 h antes.</p>
   </div>
 </section>
 

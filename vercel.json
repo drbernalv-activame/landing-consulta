@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/consulta", "destination": "/", "statusCode": 301 },
+    { "source": "/consulta/", "destination": "/", "statusCode": 301 }
+  ]
+}
