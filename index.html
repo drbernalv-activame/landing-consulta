@@ -506,6 +506,7 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
   .loc-opts{flex-direction:column}
 }
 </style>
+<link rel="stylesheet" href="/ciclo.css">
 </head>
 <body>
 
@@ -755,6 +756,47 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
         <span>Drucker</span><span>Holst</span><span>Reaven</span><span>Shulman</span><span>Cani</span><span>Hall</span><span>Phillips</span>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- MÓDULO 5.4 · ENTRE CONSULTAS: EL CICLO (versión corta: gancho, ciclo y la nota sobre Elia, sin CTA propio;
+     estilos en /ciclo.css, animación en /ciclo.js) -->
+<section class="ciclo" id="entre-consultas" aria-labelledby="cicloTitulo" data-ciclo>
+  <div class="wrap">
+    <h2 class="ciclo-titulo reveal" id="cicloTitulo">Así te acompañamos entre consultas</h2>
+    <p class="ciclo-gancho reveal" style="--d:.06s">En consulta estás con nosotros 30 minutos a la semana. La semana tiene 10,080. En los otros <strong class="ciclo-min" data-ciclo-contador>10,050</strong> minutos no estás solo.</p>
+
+    <div class="ciclo-escena">
+      <svg class="ciclo-svg" viewBox="0 0 1000 600" aria-hidden="true" focusable="false">
+        <path class="ciclo-anillo" d="M500,70 A340,250 0 1,1 500,570 A340,250 0 1,1 500,70"/>
+        <g class="ciclo-puntos"><circle r="4.5" cx="500" cy="70"/><circle r="4.5" cx="840" cy="320"/><circle r="4.5" cx="500" cy="570"/><circle r="4.5" cx="160" cy="320"/></g>
+        <g style="--i:0"><path class="ciclo-trazo" pathLength="1" d="M633.4,47.5 A390,290 0 0,1 850.5,192.9"/><path class="ciclo-punta" d="M837.5,185.8 L850.5,192.9 L849.3,178.2"/></g>
+        <g style="--i:1"><path class="ciclo-trazo" pathLength="1" d="M731,320 L601,320"/><path class="ciclo-punta" d="M614,313 L601,320 L614,327"/></g>
+        <g style="--i:2"><path class="ciclo-trazo" pathLength="1" d="M399,320 L269,320"/><path class="ciclo-punta" d="M282,313 L269,320 L282,327"/></g>
+        <g style="--i:3"><path class="ciclo-trazo" pathLength="1" d="M149.5,192.9 A390,290 0 0,1 366.6,47.5"/><path class="ciclo-punta" d="M355.9,57.6 L366.6,47.5 L352.2,44.1"/></g>
+      </svg>
+      <ol class="ciclo-nodos">
+        <li class="ciclo-nodo ciclo-nodo--equipo" style="--i:0">
+          <div class="ciclo-caja"><h3>Tu equipo médico</h3><p>Revisa todo y decide contigo tu tratamiento.</p></div>
+          <p class="ciclo-etq ciclo-etq--plan"><svg class="ciclo-baja" viewBox="0 0 14 40" aria-hidden="true" focusable="false"><path class="ciclo-linea" pathLength="1" d="M7 2V36"/><path class="ciclo-cabeza" d="M2 31L7 37L12 31"/></svg><span><span class="ciclo-sr">Hacia Ana: </span>tu plan e indicaciones</span></p>
+        </li>
+        <li class="ciclo-nodo ciclo-nodo--ana" style="--i:1">
+          <div class="ciclo-caja"><h3>Ana</h3><p>Te lleva tu plan y tu avance cada día.</p></div>
+          <p class="ciclo-etq ciclo-etq--diario"><svg class="ciclo-baja" viewBox="0 0 14 40" aria-hidden="true" focusable="false"><path class="ciclo-linea" pathLength="1" d="M7 2V36"/><path class="ciclo-cabeza" d="M2 31L7 37L12 31"/></svg><span><span class="ciclo-sr">Hacia ti: </span>acompañamiento diario</span></p>
+        </li>
+        <li class="ciclo-nodo ciclo-nodo--tu" style="--i:2">
+          <div class="ciclo-caja"><h3>Tú</h3><p>Registras tus comidas y ves tu avance.</p></div>
+          <p class="ciclo-etq ciclo-etq--datos"><svg class="ciclo-baja" viewBox="0 0 14 40" aria-hidden="true" focusable="false"><path class="ciclo-linea" pathLength="1" d="M7 2V36"/><path class="ciclo-cabeza" d="M2 31L7 37L12 31"/></svg><span><span class="ciclo-sr">Hacia Elia: </span>tus datos</span></p>
+        </li>
+        <li class="ciclo-nodo ciclo-nodo--elia" style="--i:3">
+          <div class="ciclo-caja"><h3>Elia</h3><p>Reúne tus mediciones, historia y laboratorios.</p></div>
+          <p class="ciclo-etq ciclo-etq--regreso"><svg class="ciclo-baja" viewBox="0 0 14 40" aria-hidden="true" focusable="false"><path class="ciclo-linea" pathLength="1" d="M7 2V36"/><path class="ciclo-cabeza" d="M2 31L7 37L12 31"/></svg><span><span class="ciclo-sr">De regreso a tu equipo médico: </span>análisis</span></p>
+          <span class="ciclo-regreso" aria-hidden="true"></span>
+        </li>
+      </ol>
+    </div>
+
+    <p class="ciclo-nota reveal" style="--d:.05s">Elia es el expediente de la clínica, con apoyo de inteligencia artificial. Toda decisión sobre tu tratamiento la toma tu equipo médico.</p>
   </div>
 </section>
 
@@ -1287,5 +1329,6 @@ function renderResult(){
 })();
 </script>
 
+<script src="/ciclo.js" defer></script>
 </body>
 </html>
