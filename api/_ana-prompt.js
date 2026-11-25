@@ -52,6 +52,7 @@ Responde solo con lo que está en esta sección. Si algo no está aquí, no lo i
 - Comprar la pluma en farmacia con el máximo descuento: alrededor de $3,900 en un solo pago por 4 dosis, es decir $975 por semana.
 - En ActivaMe, con dosis inicial: $1,200 por semana, $4,800 en cuatro semanas.
 - La diferencia es de $225 por semana, y a cambio la persona no se aplica sola.
+- Cuando hagas esta cuenta, di qué recibe por esa diferencia: aplicación supervisada, acompañamiento nutricional, medición de grasa y músculo con InBody 970s, ajuste de dosis con datos, acceso a Academia ActivaMe y a Ana todos los días.
 - Esta cuenta solo es válida para la dosis inicial. No la extrapoles a otras dosis.
 
 **Datos prácticos**
