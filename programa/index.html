@@ -471,6 +471,17 @@ function trackCta(location){
     log.scrollTop = log.scrollHeight;
     return d;
   }
+  /* El chat muestra texto plano. Si el modelo manda marcas de formato
+     (negritas, encabezados, viñetas), se quitan para que no salgan
+     asteriscos sueltos en pantalla. */
+  function sinFormato(t){
+    return t
+      .replace(/\*\*([^*\n]+)\*\*/g, '$1')
+      .replace(/__([^_\n]+)__/g, '$1')
+      .replace(/(^|[\s(¿¡])\*([^*\n]+)\*(?=[\s.,;:!?)]|$)/g, '$1$2')
+      .replace(/^#{1,6}\s+/gm, '')
+      .replace(/^\s*[-*]\s+/gm, '• ');
+  }
   function mostrarEscribiendo(){
     var d = document.createElement('div');
     d.className = 'msg msg-ana escribiendo';
@@ -512,6 +523,7 @@ function trackCta(location){
     .then(function(respuesta){
       if(puntos.parentNode) log.removeChild(puntos);
       if(respuesta){
+        respuesta = sinFormato(respuesta);
         burbuja(respuesta, 'ana');
         historial.push({ role: 'assistant', content: respuesta.slice(0, 2500) });
       } else {
