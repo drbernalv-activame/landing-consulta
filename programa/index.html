@@ -120,6 +120,12 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .chat-rapidas{padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--linea)}
 .chat-rapidas button{background:var(--menta);color:var(--verde);border:1px solid var(--linea-2);border-radius:999px;padding:11px 14px;font-size:.88rem;font-weight:600;min-height:44px}
 .chat-rapidas button:hover{background:#D8EAE5}
+/* Después de la primera pregunta los botones pasan a una sola fila
+   deslizable, para dejarle el espacio a la conversación. */
+.chat.en-curso .chat-rapidas{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chat.en-curso .chat-rapidas::-webkit-scrollbar{display:none}
+.chat.en-curso .chat-rapidas button{flex:0 0 auto;white-space:nowrap}
+.chat.en-curso .chat-log{height:min(420px,52vh)}
 .chat-form{display:flex;gap:8px;padding:12px 16px;border-top:1px solid var(--linea)}
 .chat-form input{flex:1;min-width:0;border:1px solid var(--linea-2);border-radius:999px;padding:12px 16px;font-size:1rem}
 .chat-form button{background:var(--ambar);color:var(--verde);border:none;border-radius:999px;padding:12px 18px;font-weight:700;font-size:.94rem;min-height:44px}
@@ -485,6 +491,7 @@ function trackCta(location){
   function preguntar(texto, clave){
     texto = (texto || '').trim();
     if(!texto || ocupada) return;
+    document.getElementById('chatAna').classList.add('en-curso');
     burbuja(texto, 'user');
     historial.push({ role: 'user', content: texto });
     bloquear(true);
