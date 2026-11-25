@@ -270,6 +270,15 @@ section{position:relative;padding:clamp(70px,11vh,140px) 0}
     .opt{display:grid;grid-row:span 5;grid-template-rows:subgrid;row-gap:0}
   }
 }
+/* Tarjeta única del Acompañamiento: en escritorio, información a la
+   izquierda y precios por dosis a la derecha. */
+.opt-link{display:inline-block;margin-top:1.3rem;color:var(--amber-glow);font-weight:700;font-size:.98rem;text-decoration:underline;text-underline-offset:4px;min-height:44px;padding-top:.5rem}
+.opt-link:hover{color:#fdfaf2}
+@media(min-width:768px){
+  .opts.opts--una{grid-template-columns:1fr}
+  .opts.opts--una .opt.opt--sola{display:grid;grid-row:auto;grid-template-rows:auto;grid-template-columns:1.25fr 1fr;column-gap:40px;align-items:start;padding:30px 32px}
+  .opts.opts--una .opt-dosis{margin-top:0}
+}
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 /* Comparativa: misma tabla que /programas, sin la cascada ni el pop. */
 .cmp-box{margin-top:2.4rem;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:18px;border:1px solid var(--line);background:var(--paper)}
@@ -701,7 +710,7 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
       <div class="pillar reveal" style="--d:.22s">
         <span class="num">03</span>
         <h3>Medición en cada cita</h3>
-        <p>Composición corporal con InBody 970s y fuerza con dinamometría en cada consulta semanal del Programa y en cada aplicación del Acompañamiento ActivaMe: sabes si estás perdiendo grasa y cuidando tu músculo.</p>
+        <p>Composición corporal con InBody 970s y fuerza con dinamometría en cada aplicación del Acompañamiento ActivaMe: sabes si estás perdiendo grasa y cuidando tu músculo.</p>
         <span class="chip">Datos reales</span>
       </div>
       <div class="pillar reveal" style="--d:.28s">
@@ -800,7 +809,7 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
   </div>
 </section>
 
-<!-- MÓDULO 5.5 · DOS FORMAS DE HACERLO
+<!-- MÓDULO 5.5 · ACOMPAÑAMIENTO ACTIVAME (única oferta)
      Conserva id="programa": el resultado del quiz (fuera de Chihuahua)
      enlaza a #programa y su lógica no se toca. -->
 <section class="oferta" id="programa">
@@ -808,36 +817,25 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
     <div class="oferta-card reveal">
       <div class="oferta-head">
         <span class="eyebrow">Después de tu consulta</span>
-        <h2>Dos formas de hacerlo con nosotros</h2>
-        <p class="tagline">En la valoración el doctor te dice con honestidad cuál de las dos te conviene, aunque la respuesta sea ninguna.</p>
+        <h2>Acompañamiento ActivaMe</h2>
+        <p class="tagline">En la valoración el doctor te dice con honestidad si te conviene, aunque la respuesta sea no.</p>
       </div>
 
-      <div class="opts">
-        <article class="opt">
-          <h3>Programa ActivaMe · 10&nbsp;semanas</h3>
-          <p class="opt-desc"><em>Tu fisiología como método.</em> Todo incluido para activar tu GLP-1 natural y transformar tus hábitos.</p>
-          <p class="opt-price"><span class="opt-ref">Valor de referencia $29,900</span>$24,900 en un pago
-            <span class="opt-price-sub">o $15,000 + 7 pagos semanales de&nbsp;$1,500</span></p>
-          <ul class="opt-list">
-            <li>10 consultas semanales con medición InBody 970s y dinamometría</li>
-            <li>Medicamento en dosis bajas, supervisado</li>
-            <li>Suplementación: Fibra Inteligente con Akkermansia, Proteína Funcional Diurna y Nocturna</li>
-            <li>Plan de alimentación y libro «Cómo activar tu GLP-1 nativo»</li>
-            <li>Ana te acompaña 60 días</li>
-            <li>Semanas de transición hacia la autonomía</li>
-          </ul>
-        </article>
-        <article class="opt">
-          <h3>Acompañamiento ActivaMe</h3>
-          <p class="opt-desc"><em>Contigo en cada aplicación.</em> Tu medicamento con supervisión médica completa: medimos, ajustamos y te acompañamos.</p>
-          <p class="opt-price">desde $1,200 por aplicación
-            <span class="opt-price-sub">pagas solo la aplicación que recibes</span></p>
-          <ul class="opt-list">
-            <li>InBody 970s, dinamómetro y presión arterial en cada aplicación</li>
-            <li>Dosis indicada por el médico</li>
-            <li>Orientación nutricional</li>
-            <li>Ana te acompaña 60 días</li>
-          </ul>
+      <div class="opts opts--una">
+        <article class="opt opt--sola">
+          <div class="opt-info">
+            <h3>Contigo en cada aplicación</h3>
+            <p class="opt-desc">Tu medicamento con supervisión médica completa: medimos, ajustamos y te acompañamos.</p>
+            <p class="opt-price">desde $1,200 por aplicación
+              <span class="opt-price-sub">pagas solo la aplicación que recibes</span></p>
+            <ul class="opt-list">
+              <li>InBody 970s, dinamómetro y presión arterial en cada aplicación</li>
+              <li>Dosis indicada por el médico</li>
+              <li>Acompañamiento nutricional en cada visita</li>
+              <li>Ana te acompaña 60 días</li>
+            </ul>
+            <a class="opt-link" href="/programa">Ver cómo funciona y preguntarle a Ana</a>
+          </div>
           <div class="opt-dosis">
             <table>
               <caption>Precio por aplicación · MXN</caption>
@@ -854,56 +852,38 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
       </div>
     </div>
 
-    <div class="cmp-box reveal">
-      <table class="cmp">
-        <colgroup><col class="c1"><col><col></colgroup>
-        <thead>
-          <tr>
-            <th scope="col"><span class="sr">Concepto</span></th>
-            <th scope="col">Programa ActivaMe</th>
-            <th scope="col">Acompañamiento ActivaMe</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><th scope="row">Meta</th><td class="txt">Activar tu GLP-1 natural y transformar tus hábitos</td><td class="txt">Usar tu medicamento con seguridad y acompa&shy;ñamiento</td></tr>
-          <tr><th scope="row">Supervisión médica</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
-          <tr><th scope="row">Composición corporal con InBody 970s</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
-          <tr><th scope="row">Función muscular con dinamometría</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
-          <tr><th scope="row">Presión arterial</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
-          <tr><th scope="row">Orientación nutricional</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td></tr>
-          <tr><th scope="row">App Ana</th><td class="txt"><span class="si" aria-hidden="true">✓</span><span class="sr">Sí,</span><br>60 días</td><td class="txt"><span class="si" aria-hidden="true">✓</span><span class="sr">Sí,</span><br>60 días</td></tr>
-          <tr><th scope="row">Educación semanal estructurada</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
-          <tr><th scope="row">Suplementación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
-          <tr><th scope="row">Libro y plan de alimentación</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
-          <tr><th scope="row">Semanas de transición hacia la autonomía</th><td><span class="si" aria-hidden="true">✓</span><span class="sr">Sí</span></td><td><span class="no" aria-hidden="true">✕</span><span class="sr">No</span></td></tr>
-          <tr><th scope="row">Pago</th><td class="txt">Programa completo</td><td class="txt">Por aplicación</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <p class="cmp-cierre reveal">El Acompañamiento te cuida mientras usas el medicamento. El Programa te prepara para cuando ya no lo uses.</p>
+    <p class="cmp-cierre reveal">Tú pagas la aplicación. El acompañamiento va incluido.</p>
   </div>
 </section>
 
-<!-- FAQ · index.html no tenía; textos tomados tal cual de /programas -->
+<!-- FAQ · mismos textos que /programa -->
 <section class="faq" id="preguntas">
   <div class="wrap">
     <div class="reveal"><span class="eyebrow">Preguntas frecuentes</span></div>
     <h2 class="reveal" style="--d:.05s">Antes de apartar tu consulta</h2>
     <div class="faq-list">
       <details class="reveal" style="--d:.08s">
-        <summary>¿Puedo empezar en el Acompañamiento ActivaMe y pasarme después al Programa?</summary>
+        <summary>¿Tengo que pagar un paquete?</summary>
         <div class="faq-a">
-          <!-- PENDIENTE: confirmar si las aplicaciones pagadas del Acompañamiento ActivaMe se abonan al Programa. -->
-          <p>Sí, en cualquier momento; lo ves con el equipo en tu siguiente aplicación.</p>
+          <p>No. Pagas solo la aplicación que recibes en cada visita; el acompañamiento va incluido.</p>
         </div>
       </details>
       <details class="reveal" style="--d:.1s">
+        <summary>¿Quién decide mi dosis?</summary>
+        <div class="faq-a">
+          <p>Tu médico, en la valoración y con tus mediciones de cada semana.</p>
+        </div>
+      </details>
+      <details class="reveal" style="--d:.12s">
+        <summary>¿Cuánto dura cada visita?</summary>
+        <div class="faq-a">
+          <p>Alrededor de 30 minutos, una vez por semana, en la clínica de Chihuahua.</p>
+        </div>
+      </details>
+      <details class="reveal" style="--d:.14s">
         <summary>¿Qué formas de pago aceptan?</summary>
         <div class="faq-a">
-          <p>Efectivo y tarjeta de crédito o débito, directamente en la clínica. En el Acompañamiento ActivaMe
-          pagas cada aplicación al momento. Los estudios de laboratorio, si el médico los indica,
-          se cobran aparte.</p>
+          <p>Efectivo y tarjeta de crédito o débito, directamente en la clínica. Pagas cada aplicación al momento.</p>
         </div>
       </details>
     </div>
@@ -914,14 +894,14 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
 <section class="accion" id="accion">
   <div class="wrap">
     <h2 class="reveal">No vendemos inyecciones. Diseñamos fisiología.</h2>
-    <p class="sub reveal" style="--d:.08s">Aparta tu consulta con el Dr. Bernal: es el primer paso tanto para el Programa ActivaMe como para el Acompañamiento ActivaMe. Si prefieres entender tu caso antes, haz el quiz GLP-1 en 3 minutos.</p>
+    <p class="sub reveal" style="--d:.08s">Aparta tu consulta con el Dr. Bernal: es el primer paso para el Acompañamiento ActivaMe. Si prefieres entender tu caso antes, haz el quiz GLP-1 en 3 minutos.</p>
     <div class="cta-group reveal" style="--d:.14s">
       <a class="cta" href="https://buy.stripe.com/eVqeVd7GMeXt3sk5te3oA05"
          data-cta-location="footer" data-cta-target="consulta">Apartar mi consulta <span class="price">$1,000</span></a>
       <a class="cta-secondary" href="#quiz"
          data-cta-location="footer" data-cta-target="quiz">Hacer el quiz GLP-1</a>
     </div>
-    <p class="fine reveal" style="--d:.2s">Tu lugar se aparta al momento del pago. Es un servicio médico independiente, no un anticipo del Programa ActivaMe ni del Acompañamiento ActivaMe. Si necesitas mover tu cita, puedes reagendar sin costo hasta 24 h antes.</p>
+    <p class="fine reveal" style="--d:.2s">Tu lugar se aparta al momento del pago. Es un servicio médico independiente, no un anticipo del Acompañamiento ActivaMe. Si necesitas mover tu cita, puedes reagendar sin costo hasta 24 h antes.</p>
   </div>
 </section>
 
@@ -951,7 +931,7 @@ body.has-sticky-bottom{padding-bottom:var(--sticky-h,72px)}
 <footer>
   ActivaMe · Tu Ruta GLP-1 Natural · Dr. Héctor Bernal — Chihuahua, México
   <span style="display:block;margin-top:14px;font-size:.76rem;line-height:1.65;color:#5c7d77">
-    Trasviña y Retes 3904, Col. San Felipe I · Chihuahua, Chih., México · C.P. 31203<br>
+    Trasviña y Retes 3904, San Felipe II Etapa · Chihuahua, Chih., México · C.P. 31203<br>
     Tel. <a href="tel:+526145415300" style="color:#5c7d77">614 541 5300</a> ·
     <a href="mailto:coordinacion@activame.mx" style="color:#5c7d77">coordinacion@activame.mx</a> ·
     <a href="https://app.activame.mx/privacidad" style="color:#5c7d77" target="_blank" rel="noopener">Aviso de Privacidad</a><br>
